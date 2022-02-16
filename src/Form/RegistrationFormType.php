@@ -53,9 +53,12 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Prénom",
-                ],new NotBlank([
-                        'message' => "Vous devez indiquer votre prénom.",
-                    ]),
+                ],'constraints'=>[
+
+                 new NotBlank([
+                            'message' => "Vous devez indiquer votre prénom.",
+                        ]),
+                ]
             ])
             
             ->add('plainPassword', PasswordType::class, [
@@ -78,17 +81,24 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Numéro de téléphone",
-                ],new NotBlank([
+                ],
+                 'constraints' => [
+
+                     new NotBlank([
                         'message' => "Vous devez indiquer votre numéro de téléphone.",
                     ]),
+                 ]
             ])
             ->add('address', TextType::class, [
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Adresse postale",
-                ],new NotBlank([
-                        'message' => "Vous devez indiquer votre adresse postale.",
-                    ]),
+                ],     'constraints' => [
+                    new NotBlank([
+                           'message' => "Vous devez indiquer votre adresse postale.",
+                       ]),
+                    ]
+                     
             ])
             
 

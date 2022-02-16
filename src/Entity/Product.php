@@ -29,6 +29,9 @@ private $reduct;
 #[ORM\ManyToOne(targetEntity:Category::class)]
 private $category_id;
 
+#[ORM\Column(type: 'string', length: 255, nullable: true)]
+private $file;
+
 public function getId(): ?int
     {
     return $this->id;
@@ -90,6 +93,18 @@ function getCategoryId(): ?Category
 function setCategoryId(?Category $category_id): self
     {
     $this->category_id = $category_id;
+
+    return $this;
+}
+
+public function getFile(): ?string
+{
+    return $this->file;
+}
+
+public function setFile(?string $file): self
+{
+    $this->file = $file;
 
     return $this;
 }

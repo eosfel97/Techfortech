@@ -31,7 +31,7 @@
   
         {% if is_granted("ROLE_USER") == true %}
            <li class="nav-item">
-          <a class="nav-link btn btn-light mt-2" href="{{ path('app_logout') }}">Logout</a>
+          <a class="nav-link  mt-2" href="{{ path('app_logout') }}">Logout</a>
         </li>
          {% endif %}
                  {% if is_granted("ROLE_USER") == false %}
