@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\User;
 use App\Entity\Product;
 use App\Entity\Category;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,6 +49,10 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Create Category', 'fas fa-plus',Category::class)->setAction(Crud::PAGE_NEW),
              MenuItem::linkToCrud('show Category', 'fas fa-eye',Category::class)
         ]);
+           yield MenuItem::section('Users');
+            yield MenuItem::subMenu('Actions','fas fa-bars')->setSubItems([
+             MenuItem::linkToCrud('show User', 'fas fa-eye',User::class)
+             ]);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

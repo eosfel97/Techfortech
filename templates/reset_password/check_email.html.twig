@@ -3,9 +3,11 @@
 {% block title %}Envoi du courriel de réinitialisation du mot de passe{% endblock %}
 
 {% block body %}
-    <p>
-        Si un compte correspondant à votre adresse e-mail existe, alors un e-mail vient d'être envoyé contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
-        Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+<div class="container check-email">
+ <p>
+        Un e-mail contenant un lien pour changer votre mot de pass vous a bien été envoyé à l'adresse e-mail de votre compte, vérifiez bien votre boite, ainsi que la section spams.
     </p>
     <p>Si vous ne recevez pas d'e-mail, vérifiez votre dossier de courrier indésirable (spam) ou  <a href="{{ path('app_forgot_password_request') }}">réessayer</a>.</p>
+</div>
+   
 {% endblock %}

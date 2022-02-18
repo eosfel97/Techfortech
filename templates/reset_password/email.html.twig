@@ -1,9 +1,9 @@
-<h1>Hi!</h1>
+<h1>Bonjour!</h1>
 
-<p>Pour réinitialiser votre mot de passe, veuillez consulter le lien suivant</p>
+<p>Vous avez fait une demande pour changer le mot de pass de votre compte sur Techfortech. Si ce n'est pas vous qui avez fait cette demande, ignorez tout simplement cet e-mail. Afin de pouvoir changer votre mot de pass, vous devez vous rendre sur le lien suivant.</p>
 
 <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
 
 <p>Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
 
-<p>Cheers!</p>
+<p>Si vous rencontrez des difficultés, veuillez contacter l'administrateur de l'espace membre.</p>

@@ -43,16 +43,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'datetime')]
     private $crearted;
 
-    #[ORM\Column(type: 'json', nullable: true)]
-    private $file = [];
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
+    #[ORM\Column(type: "boolean")]
     private $isVerified = false;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $username;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $avartar;
 
     public function getId(): ?int
     {
@@ -188,17 +186,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getFile(): ?array
-    {
-        return $this->file;
-    }
 
-    public function setFile(?array $file): self
-    {
-        $this->file = $file;
-
-        return $this;
-    }
 
     public function isVerified(): bool
     {
@@ -220,6 +208,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getAvartar(): ?string
+    {
+        return $this->avartar;
+    }
+
+    public function setAvartar(?string $avartar): self
+    {
+        $this->avartar = $avartar;
 
         return $this;
     }

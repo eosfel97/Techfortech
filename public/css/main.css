@@ -167,7 +167,6 @@ body {
   position: relative;
   top: 90px;
   gap: 30px;
-  border: 1px solid beige;
   flex-direction: column;
   display: flex;
   align-items: center;
@@ -205,4 +204,12 @@ i {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.check-email {
+  position: relative;
+  top: 90px;
+}
+.reset-password_reset {
+  position: relative;
+  top: 90px;
 }
