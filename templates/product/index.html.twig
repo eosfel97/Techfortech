@@ -1,41 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Product index{% endblock %}
+{% block title %}Tous nos produits
+{% endblock %}
 
 {% block body %}
-    <h1>Product index</h1>
+	<div class="container ">
+		<div class="row">
+			<div class="col-md-3">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Reduct</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.reduct }}</td>
-                <td>
-                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a class="btn btn-success"href="{{ path('product_new') }}">Create new</a>
+				{% include 'product/_filter.html.twig' with {form:form} only%}
+			</div>
+			<div class="col-md-9">
+				<div class="grid">
+					{% for product in products %}
+						{% include 'product/_card.html.twig' with {product:product} only%}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
