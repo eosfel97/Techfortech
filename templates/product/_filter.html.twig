@@ -1,12 +1,13 @@
 {{ form_start(form, {attr: {class: 'filter js-filter-form'}}) }}
 
-<div class="spinner-border js-loading" role="status" aria-hidden="true" style="display: none">
+{# <div class="spinner-border js-loading" role="status" aria-hidden="true" style="display: none">
 	<span class="sr-only">Loading...</span>
-</div>
+</div> #}
 
 {{ form_row(form.q) }}
 
-<h4>Catégories</h4>
+<h4 style="font-weight:bold;font-size:1.5rem;" class="m-3">Catégories</h4>
+
 {{ form_row(form.categories) }}
 
 <h4>Prix</h4>

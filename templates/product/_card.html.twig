@@ -1,9 +1,11 @@
 <div class="card">
-	<img src="{{product.file}}" alt="" class="card-img-top">
+	<img src="/upload/images/products/{{product.file}}" alt="" class="card-img-top">
 	<div class="card-body">
-		<h5 class="card-title">{{product.name}}</h5>
+		<h5 class="card-title text-center fw-bold fs-3">{{product.name}}</h5>
+
+
 		<div class="card-title text-primary" style="font-weight: bold; font-size: 1.5rem;">
-			{{product.price | number_format(0, ',', '')}}
+			{{product.price/100 | number_format(0, ',', '')}}
 			€
 			{% if product.reduct%}
 				<div class="text text-warning">

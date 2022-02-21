@@ -1,71 +1,112 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
-   {# hearder #}
-   <header id="header">
- <div id="carouselExampleIndicators"class="carousel slide"data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide-to="0"
-          class="active"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide-to="1"
-          aria-label="Slide 2"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleIndicators"
-          data-bs-slide-to="2"
-          aria-label="Slide 3"
-        ></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <a href="#">
-            <img src="/upload/images/products/15832_b.jpg" class="d-block w-100" alt="..." />
-          </a>
-        </div>
-        <div class="carousel-item">
-          <a href="#">
-            <img src="/upload/images/products/15855_b.jpg" class="d-block w-100" alt="..." />
-          </a>
-        </div>
-        <div class="carousel-item">
-          <a href="#">
-            <img src="/upload/images/products/15888_b.jpg" class="d-block w-100" alt="..." />
-          </a>
-        </div>
-      </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="prev"
-      >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleIndicators"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-   </header>
-<nav>
+	{# hearder #}
+	<header id="header">
+		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+			</div>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<a href="#">
+						<img src="/upload/images/products/15832_b.jpg" class="d-block w-100" alt="..."/>
+					</a>
+				</div>
+				<div class="carousel-item">
+					<a href="#">
+						<img src="/upload/images/products/15855_b.jpg" class="d-block w-100" alt="..."/>
+					</a>
+				</div>
+				<div class="carousel-item">
+					<a href="#">
+						<img src="/upload/images/products/15888_b.jpg" class="d-block w-100" alt="..."/>
+					</a>
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+	</header>
+	<main>
+		<h2 class="h1-top" style=" font-size: 2.5rem;">CATÉGORIES POPULAIRES</h2>
+		<section>
 
-</nav>
+			<div class="container d-flex justify-content-around align-items-center mt-5">
+
+
+				<div class="card" style="width: 18rem;">
+
+
+					<img src="/upload/images/products/LD0005869780_1.jpg" class="card-img-top" alt="...">
+
+					<div class="card-body text-center">
+						<h5 class="card-title fs-5 fw-bold">
+							<a href="http://">COMPOSANTS</a>
+
+
+						</h5>
+
+					</div>
+				</div>
+				<div class="card" style="width: 18rem;">
+
+					<img src="/upload/images/products/LD0005776729_1.jpg" class="card-img-top" alt="...">
+
+
+					<div class="card-body text-center">
+
+						<h5 class="card-title fs-5 fw-bold">
+							<a href="http://">PÉRIPHÉRIQUES PC</a>
+
+						</h5>
+
+
+					</div>
+				</div>
+				<div class="card" style="width: 18rem;">
+
+					<img src="/upload/images/products/LD0005871582_1.jpg" class="card-img-top" alt="...">
+
+
+					<div class="card-body text-center">
+
+						<h5 class="card-title fs-5 fw-bold">
+
+							<a href="http://">ORDINATEUR DE BUREAU</a>
+						</h5>
+
+
+					</div>
+				</div>
+
+			</div>
+		</section>
+		<h2 class="h1-top mt-5" style=" font-size: 2.5rem;">NOUVEAUTÉS</h2>
+		<section>
+			<div class="container">
+				<div class="col-md-12">
+					<div class="grid mt-5 " style="width: 85rem;">
+
+
+						{% for product in products %}
+							{% include 'product/_card.html.twig' with {product:product} only%}
+						{% endfor %}
+					</div>
+				</div>
+
+			</div>
+		</section>
+	</main>
 {% endblock %}

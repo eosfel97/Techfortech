@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\ContactType;
 use App\Form\Builder\Contact;
+use App\Repository\ProductRepository;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mime\Address;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -16,10 +17,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/', name:'home')]
-function index(): Response
+function index(ProductRepository $productRepository): Response
     {
+        $products = $productRepository->findAll();
     return $this->render('home/index.html.twig', [
-        'controller_name' => 'HomeController',
+        'products' => $products,
         'nom' => 'Gnahiet any',
     ]);
 }
