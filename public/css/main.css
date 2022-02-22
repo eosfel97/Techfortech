@@ -144,7 +144,7 @@ body {
   position: relative;
   top: 90px;
   gap: 20px;
-  width: 80vh;
+  width: 100vh;
   height: 600px;
   background-color: #fff;
   box-shadow: 10px 5px 5px 10px rgba(211, 211, 211, 0.2);
