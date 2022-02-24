@@ -1,50 +1,54 @@
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-2">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{ path("home")}}"><img src="/upload/Vert Foncé Diamant Technologie de Pointe Informatique Logo.png" alt="" style="width: 100px; height:100px"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+	<div class="container-fluid">
+		<a class="navbar-brand" href="{{ path("home")}}"><img src="/upload/Vert Foncé Diamant Technologie de Pointe Informatique Logo.png" alt="" style="width: 100px; height:100px"></a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-    <div class="collapse navbar-collapse" id="navbarColor03">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link active btn btn-lg my-2 " href="{{ path('home') }}">Accueil
-          </a>
-        </li>
+		<div class="collapse navbar-collapse" id="navbarColor03">
+			<ul class="navbar-nav me-auto">
+				<li class="nav-item">
+					<a class="nav-link active btn btn-lg my-2 " href="{{ path('home') }}">Accueil
+					</a>
+				</li>
 
 
-        {% if is_granted("ROLE_ADMIN") == true %}
-        <li class="nav-item">
-          <a class="nav-link btn btn-lg btn-danger my-2" href="{{ path('admin_index') }}">admin</a>
-        </li>
-        {% endif %}
-      </ul>
+				{% if is_granted("ROLE_ADMIN") == true %}
+					<li class="nav-item">
+						<a class="nav-link btn btn-lg btn-danger my-2" href="{{ path('admin_index') }}">admin</a>
+					</li>
+				{% endif %}
+			</ul>
 
-      </ul>
-      <ul class="navbar-nav ms-auto" >
-  
-        {% if is_granted("ROLE_USER") == true %}
-           <li class="nav-item">
-          <a class="nav-link btn btn-lg btn-info mt-2" href="{{ path('app_logout') }}">Déconnexion</a>
-        </li>
-         {% endif %}
-                 {% if is_granted("ROLE_USER") == false %}
-        <li class="nav-item">
-          <a class="nav-link  btn my-2 my-sm-0 text-black" href="{{ path('app_login') }}"><i class="fa-solid fa-user-astronaut fa-3x"></i></a>
-        </li>
-        {% endif %}
-      
-      </ul>
-    </div>
-  </div>
-</nav>
-<div class="container">
+		</ul>
+		<ul class="navbar-nav ms-auto">
+
+			{% if is_granted("ROLE_USER") == true %}
+				<li class="nav-item">
+					<a class="nav-link btn btn-lg btn-info mt-2" href="{{ path('app_logout') }}">Déconnexion</a>
+				</li>
+			{% endif %}
+			{% if is_granted("ROLE_USER") == false %}
+				<li class="nav-item">
+					<a class="nav-link  btn my-2 my-sm-0 text-black" href="{{ path('app_login') }}">
+						<i class="fa-solid fa-user-astronaut fa-3x"></i>
+					</a>
+				</li>
+			{% endif %}
+			<li class="nav-item">
+				<a class="nav-link  btn my-2 my-sm-0 text-black" href="{{ path('cart_index') }}">
+					<i class="fa-solid fa-bag-shopping fa-3x" id="fa-bag"></i>
+
+
+				</a>
+			</li>
+		</ul>
+	</div>
+</div></nav><div class="container">
 {% for classStyle,messages in app.flashes %}
-{% for message in messages %}
-<div class="alert alert-{{classStyle}}" role="alert">
- <p class="mb-0">{{ message }}</p>
-</div>
-{% endfor %}
-{% endfor %}
-</div>
+	{% for message in messages %}
+		<div class="alert alert-{{classStyle}}" role="alert">
+			<p class="mb-0">{{ message }}</p>
+		</div>
+	{% endfor %}
+{% endfor %}</div>

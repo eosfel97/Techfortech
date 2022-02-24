@@ -18,7 +18,8 @@
 				<div class="text text-warning">
 					Promo !</div>
 			{% endif %}
-			<a class="shop-btn" href="">
+			<a class="shop-btn" href="{{path('cart_add',{'id': product.id} )}}">
+
 				<i class="fa-solid fa-bag-shopping fa-2x"></i>
 			</a>
 		</div>

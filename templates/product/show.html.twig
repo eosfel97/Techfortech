@@ -1,16 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="container">
-		<h1 class="">{{product.name}}</h1>
-		<img src="/upload/images/products/{{product.file}}" style="width:300px;height: 300px;" alt="" class="card-img-top">
+	<div class="container d-flex justify-content-arround align-items-center">
+
 
 		<div class="container">
-			<h1 class="">{{product.price}}</h1>
+			<h1 class="">{{product.name}}</h1>
+			<img src="/upload/images/products/{{product.file}}" style="width:300px;height: 300px;" alt="" class="card-img-top">
 
 		</div>
 
+		<div class="container">
+			<div class="conatiner">
+				<h1 class="">{{product.price/100 | number_format(0, ',', '')}}
+					€</h1>
+				<a href="{{path('cart_add',{'id': product.id})}}" class="btn btn-primary ">
+					AJOUTER AU PANIER</a>
 
+			</div>
+		</div>
 	</div>
 	<nav>
 		<div class="nav nav-tabs" id="nav-tab" role="tablist">
