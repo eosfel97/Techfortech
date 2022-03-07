@@ -36,4 +36,11 @@ class CartController extends AbstractController
         $cartService->remove($id);
         return $this->redirectToRoute("cart_index");
     }
+
+    #[Route('/panier/less/{id}', name: 'cart_less')]  
+    public function less( $id, CartService $cartService)    
+    {
+        $cartService->less($id);
+        return $this->redirectToRoute("cart_index");
+    }
 }

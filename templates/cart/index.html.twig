@@ -4,8 +4,25 @@
 {% endblock %}
 
 {% block body %}
+	<style>
+		.fa-circle-plus,
+		.fa-circle-minus {
+
+
+			color: black;
+		}
+		tbody {
+			font-size: 18px;
+
+		}
+		.tt {
+			font-size: 18px;
+			font-weight: bold;
+		}
+	</style>
+
 	<div class="bg-light p-3">
-		<h1>Votre panier</h1>
+		<h1 class="h1-top">Votre panier</h1>
 	</div>
 	{% if items | length  > 0 %}
 		<table class="table">
@@ -23,7 +40,19 @@
 					<tr>
 						<td>{{item.product.name}}</td>
 						<td>{{item.product.price | price}}</td>
-						<td>{{item.quantity}}</td>
+						<td>
+							<a href="{{path('cart_add',{'id': item.product.id} )}}">
+
+								<i class="fa-solid fa-circle-plus fa-1x"></i>
+							</a>
+
+
+							{{item.quantity}}
+							<a href="{{path('cart_less',{'id': item.product.id} )}}" class="fa-solid fa-circle-minus fa-1x"></a>
+
+
+						</td>
+
 						<td>{{(item.product.price  * item.quantity) | price }}</td>
 
 
@@ -37,10 +66,9 @@
 				{% endfor %}
 			</tbody>
 			<tfoot>
-				<tr>
-					<td colspan="3" class="text-right">Total :</td>
+				<tr class="tt">
+					<td colspan="3">TOTAL :</td>
 					<td>{{total | price}}</td>
-
 					<td></td>
 				</tr>
 			</tfoot>

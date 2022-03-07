@@ -69,4 +69,15 @@ class CartService
         }
         return $total;
      }
+
+     public function less( int $id)
+     {
+        $panier = $this->session->get('panier',[]);
+        if(($panier[$id])<2){
+             unset($panier[$id]);
+        }else{
+            $panier[$id]--;
+        }
+        $this->session->set('panier',$panier); 
+     }
 }
