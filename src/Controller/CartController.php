@@ -29,7 +29,6 @@ class CartController extends AbstractController
     }
     
     
-    
     #[Route('/panier/remove/{id}', name: 'cart_remove')]
     
     public function remove($id, CartService $cartService){

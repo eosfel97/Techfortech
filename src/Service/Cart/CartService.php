@@ -2,6 +2,7 @@
 
 namespace App\Service\Cart;
 
+use App\Entity\Purchase;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -56,6 +57,7 @@ class CartService
         }
         return $panierWithData;
     }
+
 
 
      public function getTotal(): float

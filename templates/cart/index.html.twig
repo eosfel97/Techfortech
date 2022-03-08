@@ -73,6 +73,9 @@
 				</tr>
 			</tfoot>
 		</table>
+		{% if items != [] %}
+			<a href="{{path('order_new')}}" class="btn btn-primary">Valider</a>
+		{% endif %}
 	{% else %}
 		<p>Surprise, c'est vide!</p>
 	{% endif %}

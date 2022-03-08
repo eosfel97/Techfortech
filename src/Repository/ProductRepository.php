@@ -92,4 +92,8 @@ public function findSearch(SearchData $search): array
         ;
     }
     */
+//       public function __toString()
+//   {
+//       return $this->();
+//   }
 }

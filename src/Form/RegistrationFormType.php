@@ -12,6 +12,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\LocaleType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class RegistrationFormType extends AbstractType
@@ -91,6 +94,40 @@ class RegistrationFormType extends AbstractType
                     ]),
                  ]
             ])
+             ->add('town', TextType::class, [
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Ville/Commune",
+                ],     'constraints' => [
+                    new NotBlank([
+                           'message' => "Vous devez indiquer votre Ville/Commune.",
+                       ]),
+                    ]
+                     
+            ])
+                ->add('zip_code', TextType::class, [
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Code Postale",
+                ],     'constraints' => [
+                    new NotBlank([
+                           'message' => "Vous devez indiquer votre Code Postale.",
+                       ]),
+                    ]
+                     
+            ])
+            ->add('country', CountryType::class, [
+                'required' => true,
+                'attr' => [
+                    'placeholder' => "Pays",
+                ],     'constraints' => [
+                    new NotBlank([
+                           'message' => "Vous devez indiquer votre Pays.",
+                       ]),
+                    ]
+                     
+            ])
+            
             ->add('address', TextType::class, [
                 'required' => true,
                 'attr' => [
@@ -117,10 +154,7 @@ class RegistrationFormType extends AbstractType
                         'mimeTypesMessage' => 'Please upload a valid PDF document',
                     ])
                 ],
-            ])
-
-
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
