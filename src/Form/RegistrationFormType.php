@@ -105,7 +105,7 @@ class RegistrationFormType extends AbstractType
                     ]
                      
             ])
-                ->add('zip_code', TextType::class, [
+                ->add('zipCode', TextType::class, [
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Code Postale",

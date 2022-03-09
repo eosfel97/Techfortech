@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\PurchaseRepository;
+use App\Repository\PurchasesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PurchaseRepository::class)]
-class Purchase
+#[ORM\Entity(repositoryClass: PurchasesRepository::class)]
+class Purchases
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,7 +17,7 @@ class Purchase
     #[ORM\JoinColumn(nullable: false)]
     private $product;
 
-    #[ORM\ManyToOne(targetEntity: Order::class)]
+    #[ORM\ManyToOne(targetEntity: Invoice::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $invoice;
 
@@ -44,12 +44,12 @@ class Purchase
         return $this;
     }
 
-    public function getInvoice(): ?Order
+    public function getInvoice(): ?Invoice
     {
         return $this->invoice;
     }
 
-    public function setInvoice(?Order $invoice): self
+    public function setInvoice(?Invoice $invoice): self
     {
         $this->invoice = $invoice;
 

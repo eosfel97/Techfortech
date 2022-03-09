@@ -42,11 +42,8 @@
 						<td>{{item.product.price | price}}</td>
 						<td>
 							<a href="{{path('cart_add',{'id': item.product.id} )}}">
-
 								<i class="fa-solid fa-circle-plus fa-1x"></i>
 							</a>
-
-
 							{{item.quantity}}
 							<a href="{{path('cart_less',{'id': item.product.id} )}}" class="fa-solid fa-circle-minus fa-1x"></a>
 
@@ -74,7 +71,7 @@
 			</tfoot>
 		</table>
 		{% if items != [] %}
-			<a href="{{path('order_new')}}" class="btn btn-primary">Valider</a>
+			<a href="{{path('invoice_new')}}" class="btn btn-primary">Valider</a>
 		{% endif %}
 	{% else %}
 		<p>Surprise, c'est vide!</p>

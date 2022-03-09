@@ -54,8 +54,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $avartar;
 
-
-
     #[ORM\Column(type: 'string', length: 255)]
     private $town;
 
@@ -63,7 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $country;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $zip_code;
+    private $zipCode;
 
 
 
@@ -265,12 +263,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getZipCode(): ?string
     {
-        return $this->zip_code;
+        return $this->zipCode;
     }
 
-    public function setZipCode(string $zip_code): self
+    public function setZipCode(string $zipCode): self
     {
-        $this->zip_code = $zip_code;
+        $this->zipCode = $zipCode;
 
         return $this;
     }

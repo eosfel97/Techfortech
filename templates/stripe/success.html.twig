@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello stripeController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		h2 {
+			text-transform: uppercase;
+
+
+		}
+		body {
+			background-color: #03a9f4;
+			height: 100vh;
+
+		}
+		#recap {
+			position: relative;
+			margin-top: auto;
+		}
+	</style>
+	<section id="recap" class="py-5">
+
+		<div class="container ">
+
+			<div class="title text-center">
+				<h2 class="position-relative d-inline-block py-2">récapitulatif de votre commande</h2>
+			</div>
+			<div class="row g-0 ">
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Produit</th>
+							<th>Prix</th>
+							<th>Quantité</th>
+							<th>Total</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for row in purchases %}
+							<tr>
+								<td>{{row.product.name}}</td>
+								<td>{{row.unitPrice | price}}</td>
+								<td>{{row.quantity}}</td>
+							</tr>
+						</tbody>
+					</tbody>
+				{% endfor %}
+				<tfoot>
+					<tr class="tt">
+						<td colspan="3">TOTAL :</td>
+						<td>{{invoice.totalPrice | price}}</td>
+						<td></td>
+					</tr>
+				</tfoot>
+			</table>
+			<div class="container ">
+
+				<div class="title text-center">
+					<h2 class="position-relative d-inline-block py-2">addresse de l'ivraison</h2>
+				</div>
+				<p>{{invoice.firstname}}
+					{{invoice.name}}</p>
+				<p>{{invoice.address}}</p>
+				<p>{{invoice.zipCode}}
+					{{invoice.town}}</p>
+				<p>{{invoice.country}}</p>
+				<h3>{% trans %}template.stipe.success:order status: paid{% endtrans %}</h3>
+
+			</div>
+		</div>
+
+	</section>
+
+{% endblock %}

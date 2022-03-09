@@ -2,14 +2,15 @@
 
 namespace App\Form;
 
-use App\Entity\Order;
+use App\Entity\Invoice;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 
-class OrderType extends AbstractType
+class InvoiceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -34,6 +35,26 @@ class OrderType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('address',TextType::class,[
+                'required' => true,
+                'attr' => [
+                'placeholder' => "Address",
+                ],'constraints' => [
+                    new NotBlank([
+                        'message' => "Vous devez indiquer votre Address.",
+                    ]),
+                ],
+            ])
+                ->add('country',CountryType::class,[
+                'required' => true,
+                'attr' => [
+                'placeholder' => "Pays",
+                ],'constraints' => [
+                    new NotBlank([
+                        'message' => "Vous devez indiquer votre Pays.",
+                    ]),
+                ],
+            ])
             ->add('town',TextType::class,[
                 'required' => true,
                 'attr' => [
@@ -44,16 +65,7 @@ class OrderType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('country',TextType::class,[
-                'required' => true,
-                'attr' => [
-                'placeholder' => "Pays",
-                ],'constraints' => [
-                    new NotBlank([
-                        'message' => "Vous devez indiquer votre Pays.",
-                    ]),
-                ],
-            ])
+
             ->add('zip_code',TextType::class,[
                 'required' => true,
                 'attr' => [
@@ -70,7 +82,7 @@ class OrderType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Order::class,
+            'data_class' => Invoice::class,
         ]);
     }
 }
