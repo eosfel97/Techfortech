@@ -1,28 +1,50 @@
-<div class="card">
+<style>
+	.product-img span {
+		top: 20px;
+		right: 20px;
+	}
+	.product-list .btn {
+		padding: 8px 20px !important;
+	}
+	.product-img img {
+		-webkit-transition: all 0.3s ease;
+		-o-transition: all 0.3s ease;
+		transition: all 0.3s ease;
+	}
+	.product-img:hover img {
+		-webkit-transform: scale(1.2);
+		-ms-transform: scale(1.2);
+		transform: scale(1.2);
+	}
+	.d_pi {
+		display: flex;
+		flex-direction: column;
+	}
+	.product-img img {
+		-webkit-transition: all 0.3s ease;
+		-o-transition: all 0.3s ease;
+		transition: all 0.3s ease;
+	}
+	.product-img:hover img {
 
-	<img src="/upload/images/products/{{product.file}}" alt="" class="card-img-top">
-	<div class="card-body">
-		<h5 class="card-title text-center  fs-3">
+		-webkit-transform: scale(1.2);
+		-ms-transform: scale(1.2);
+		transform: scale(1.2);
+	}
+</style>
+
+<div class="col-md-6 col-lg-4 col-xl-3 p-2 ">
+
+	<div class="product-img position-relative overflow-hidden">
+
+		<img src="/upload/images/products/{{product.file}}" class="w-100"/>
+	</div>
+	<div class="text-center d_pi">
+		<p class="text-capitalize my-1">
 			<a href="{{ path('product_show', {'id': product.id}) }}">{{product.name}}</a>
+		</p>
 
-
-		</h5>
-
-
-		<div class="card-title text-primary d-flex justify-content-between  align-items-center mt-3" style="font-weight: bold; font-size: 1.3rem;">
-
-
-			{{product.price/100 | number_format(0, ',', '')}}
-			€
-			{% if product.reduct%}
-				<div class="text text-warning">
-					Promo !</div>
-			{% endif %}
-			<a class="shop-btn" href="{{path('cart_add',{'id': product.id} )}}">
-
-				<i class="fa-solid fa-bag-shopping fa-2x"></i>
-			</a>
-		</div>
-
+		<span class="fw-bold">{{product.price/100 | number_format(0, ',', '')}}€</span>
+		<a href="{{path('cart_add',{'id': product.id} )}}" class="btn btn-primary mt-3">Add to Cart</a>
 	</div>
 </div>

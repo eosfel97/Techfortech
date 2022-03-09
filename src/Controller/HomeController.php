@@ -24,7 +24,7 @@ function index(ProductRepository $productRepository): Response
             [],[
                 "name"=>"ASC",
             ],
-            5,
+            4,
             0
         );
     return $this->render('home/index.html.twig', [

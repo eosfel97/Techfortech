@@ -29,7 +29,7 @@ class StripeController extends AbstractController
         foreach ($purchases as $purchase){
             $item =[
                 "price_data"=>[
-                    "curency"=>"eur",
+                    "currency"=>"eur",
                     "product_data"=>[
                         "name"=>$purchase->getProduct()->getName(),
                     ],

@@ -14,9 +14,6 @@ class Order
     #[ORM\Column(type: 'integer')]
     private $id;
 
- 
-  #[ORM\ManyToOne(targetEntity: User::class)]
-    private $user;
 
   #[ORM\Column(type: 'string', length: 255, nullable: true)]
   private $Stripe_Succes_Keys;
@@ -44,21 +41,13 @@ class Order
 
   #[ORM\Column(type: 'string', length: 255)]
   private $zip_code;
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
 
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
     public function getStripeSuccesKeys(): ?string
     {
@@ -166,8 +155,5 @@ class Order
 
         return $this;
     }
-    public function __toString()
-    {
-       
-    }
+
 }

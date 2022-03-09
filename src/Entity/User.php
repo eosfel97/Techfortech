@@ -54,8 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $avartar;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)]
-    private $orders;
+
 
     #[ORM\Column(type: 'string', length: 255)]
     private $town;
@@ -66,10 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private $zip_code;
 
-    public function __construct()
-    {
-        $this->orders = new ArrayCollection();
-    }
+
 
     public function getId(): ?int
     {
@@ -239,36 +235,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvartar(?string $avartar): self
     {
         $this->avartar = $avartar;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Order[]
-     */
-    public function getOrders(): Collection
-    {
-        return $this->orders;
-    }
-
-    public function addOrder(Order $order): self
-    {
-        if (!$this->orders->contains($order)) {
-            $this->orders[] = $order;
-            $order->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Order $order): self
-    {
-        if ($this->orders->removeElement($order)) {
-            // set the owning side to null (unless already changed)
-            if ($order->getUser() === $this) {
-                $order->setUser(null);
-            }
-        }
 
         return $this;
     }

@@ -5,9 +5,10 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Form\OrderType;
 use App\Entity\Purchase;
-use App\Repository\ProductRepository;
 use App\Service\Cart\CartService;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,9 +26,10 @@ class OrderController extends AbstractController
         ]);
     }
    #[Route('/order', name: 'order_new', methods: ['GET', 'POST'])]
-   public function new(Request $request,SessionInterface $session,CartService $cartService,EntityManagerInterface $entityManager,ProductRepository $productRepository  ): Response
+   public function new(Request $request,SessionInterface $session,CartService $cartService,ManagerRegistry $doctrine,ProductRepository $productRepository  ): Response
    {
         $order = new Order();
+        /** @var User $user */
         $user = $this->getUser();
         $total= $cartService->getTotal();
 
@@ -35,22 +37,25 @@ class OrderController extends AbstractController
         {
             $order->setName($user->getLastname())
                   ->setFirstname($user->getFirstname())
-                  ->setCountry($user->getCountry())
                   ->setZipCode($user->getZipCode())
+                  ->setCountry($user->getCountry())
                   ->setTown($user->getTown());
         }
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
         {
+            /** @var Doctrine $doctrine */
+            $entityManager = $doctrine->getManager();
             $order->setTotalPrice($total)
+                    ->setPiStripe("")
                   ->setPaid(false)
                   ->setStripeSuccesKeys(uniqid());
             $entityManager->persist($order);
             $panier = $session->get('panier',[]);
             foreach($panier as $id => $quantity)
             {
-            $product =$this->$productRepository->find($id);
+            $product = $productRepository->find($id);
             $purchase = new Purchase;
             $purchase->setInvoice($order)
                     ->setProduct($product)
@@ -58,6 +63,7 @@ class OrderController extends AbstractController
                     ->setQuantity($quantity);
             $entityManager->persist($purchase);
             }
+            // dd($order);
             $entityManager->flush();
             return $this->redirectToRoute('stripe_checkout', ["order"=>$order->getId()], Response::HTTP_SEE_OTHER);
         }
