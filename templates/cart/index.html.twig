@@ -15,65 +15,75 @@
 			font-size: 18px;
 
 		}
+		#cartShop {
+			margin-top: 150px;
+		}
 		.tt {
 			font-size: 18px;
 			font-weight: bold;
 		}
 	</style>
-
-	<div class="bg-light p-3">
-		<h1 class="h1-top">Votre panier</h1>
-	</div>
-	{% if items | length  > 0 %}
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Produit</th>
-					<th>Prix</th>
-					<th>Quantité</th>
-					<th>Total</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for item in items %}
-					<tr>
-						<td>{{item.product.name}}</td>
-						<td>{{item.product.price | price}}</td>
-						<td>
-							<a href="{{path('cart_add',{'id': item.product.id} )}}">
-								<i class="fa-solid fa-circle-plus fa-1x"></i>
-							</a>
-							{{item.quantity}}
-							<a href="{{path('cart_less',{'id': item.product.id} )}}" class="fa-solid fa-circle-minus fa-1x"></a>
-
-
-						</td>
-
-						<td>{{(item.product.price  * item.quantity) | price }}</td>
+	<section id="cartShop" class="py-1">
+		<div class="container">
+			<div class="title text-center">
+				<h2 class="position-relative d-inline-block py-2">Votre panier</h2>
+			</div>
+			<div class="row g-0">
+				{% if items | length  > 0 %}
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Produit</th>
+								<th>Prix</th>
+								<th>Quantité</th>
+								<th>Total</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for item in items %}
+								<tr>
+									<td>{{item.product.name}}</td>
+									<td>{{item.product.price | price}}</td>
+									<td>
+										<a href="{{path('cart_add',{'id': item.product.id} )}}">
+											<i class="fa-solid fa-circle-plus fa-1x"></i>
+										</a>
+										{{item.quantity}}
+										<a href="{{path('cart_less',{'id': item.product.id} )}}" class="fa-solid fa-circle-minus fa-1x"></a>
 
 
-						<td>
-							<a href="{{path('cart_remove',{'id': item.product.id} )}}" class=" btn btn-danger btn-sm">
+									</td>
 
-								<i class="fas fa-trash"></i>
-							</a>
-						</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-			<tfoot>
-				<tr class="tt">
-					<td colspan="3">TOTAL :</td>
-					<td>{{total | price}}</td>
-					<td></td>
-				</tr>
-			</tfoot>
-		</table>
-		{% if items != [] %}
-			<a href="{{path('invoice_new')}}" class="btn btn-primary">Valider</a>
-		{% endif %}
-	{% else %}
-		<p>Surprise, c'est vide!</p>
-	{% endif %}
-{% endblock %}
+									<td>{{(item.product.price  * item.quantity) | price }}</td>
+
+
+									<td>
+										<a href="{{path('cart_remove',{'id': item.product.id} )}}" class=" btn btn-danger btn-sm">
+
+											<i class="fas fa-trash"></i>
+										</a>
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+						<tfoot>
+							<tr class="tt">
+								<td colspan="3">TOTAL :</td>
+								<td>{{total | price}}</td>
+								<td></td>
+							</tr>
+						</tfoot>
+					</table>
+					{% if items != [] %}
+						<a href="{{path('invoice_new')}}" class="btn btn-primary">Valider</a>
+					{% endif %}
+				{% else %}
+					<h1 class="text-center">Surprise, votre panier est vide!</h1>
+					<img src="/upload/panier.png" alt="" style="width: 500px; height:500px">
+				{% endif %}
+			</div>
+		</section>
+
+
+	{% endblock %}

@@ -1,23 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Réinitialiser votre mot de passe{% endblock %}
+{% block title %}Réinitialiser votre mot de passe
+{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('reset_password_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
-    <div class="container loggin_reset"> 
-      <h1 class="h1-top">réinitialisation de mot de passe :</h1>
-
-    {{ form_start(requestForm) }}
-        {{ form_widget(requestForm.email) }}
-        <div class="mt-2">
-            <small>
-        Veuillez saisir l'adresse email utilisée dans votre compte client pour recevoir un lien de réinitialisation de mot de passe.
-            </small>
-        </div>
-        <div class="container loggin_reset_btn">  <button class="btn btn-lg btn-primary">VALIDER</button></div>
-
-    {{ form_end(requestForm) }}
-    </div>
-{% endblock %}
+	<style>
+		body {
+			background-color: #03a9f4;
+			height: 100%;
+		}
+		#resetPass {
+			margin-top: auto;
+		}
+	</style>
+	{% for flashError in app.flashes('reset_password_error') %}
+		<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+	{% endfor %}
+	<section id="resetPass" class="py-5">
+		<div class="container">
+			<div class="title text-center">
+				<h2 class="position-relative d-inline-block py-2">RÉINITIALISATION DE MOT DE PASSE</h2>
+			</div>
+			<div class="row g-0">
+				<div class="container">
+					{{ form_start(requestForm) }}
+					{{ form_widget(requestForm.email) }}
+					<div class="mt-2">
+						<small>
+							Veuillez saisir l'adresse email utilisée dans votre compte client pour recevoir un lien de réinitialisation de mot de passe.
+						</small>
+					</div>
+					<div class="title text-center py-2">
+						<button class="btn btn-lg btn-primary loggin_reset_btn">VALIDER</button>
+					</div>
+					{{ form_end(requestForm) }}
+				</div>
+			</div>
+		</section>
+	{% endblock %}

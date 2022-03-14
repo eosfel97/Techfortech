@@ -4,42 +4,52 @@
 {% endblock %}
 
 {% block body %}
-	<h1 class="h1-top">récapitulatif de la commande</h1>
+	<style>
+		#ShopFinal {
+			margin-top: 150px;
+		}
+	</style>
+	<section id="ShopFinal" class="py-1">
+		<div class="container">
+			<div class="title text-center">
+				<h2 class="position-relative d-inline-block py-2">ADRESSE DE LIVRAISON</h2>
+			</div>
+			<div class="row g-0">
+				{{ form_start(form) }}
+				{{ form_widget(form) }}
+				<button class="btn btn-dark">{{ button_label|default('Confirm') }}</button>
+				{{ form_end(form) }}
+				<h1 class="h1-top">récapitulatif de la commande</h1>
 
-	<table class="table">
-		<thead>
-			<tr>
-				<th>Produit</th>
-				<th>Prix</th>
-				<th>Quantité</th>
-				<th>Total</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for item in items %}
-				<tr>
-					<td>{{item.product.name}}</td>
-					<td>{{item.product.price | price}}</td>
-					<td>{{item.quantity}}</td>
-					<td>{{(item.product.price  * item.quantity) | price }}</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-		<tfoot>
-			<tr class="tt">
-				<td colspan="3">TOTAL :</td>
-				<td>{{total | price}}</td>
-				<td></td>
-			</tr>
-		</tfoot>
-	</table>
-
-	<h2 class="h1-top">adresse de livraison</h2>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Produit</th>
+							<th>Prix</th>
+							<th>Quantité</th>
+							<th>Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for item in items %}
+							<tr>
+								<td>{{item.product.name}}</td>
+								<td>{{item.product.price | price}}</td>
+								<td>{{item.quantity}}</td>
+								<td>{{(item.product.price  * item.quantity) | price }}</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+					<tfoot>
+						<tr class="tt">
+							<td colspan="3">TOTAL :</td>
+							<td>{{total | price}}</td>
+							<td></td>
+						</tr>
+					</tfoot>
+				</table>
 
 
-	{{ form_start(form) }}
-	{{ form_widget(form) }}
-	<button class="btn btn-dark">{{ button_label|default('Confirm') }}</button>
-	{{ form_end(form) }}
-
-{% endblock %}
+			</div>
+		</section>
+	{% endblock %}

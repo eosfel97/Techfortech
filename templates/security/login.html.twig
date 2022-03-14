@@ -13,18 +13,9 @@
 		#connection {
 			position: relative;
 			margin-top: auto;
+
 		}
-		.loggin {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			width: 60vh;
-			gap: 20px;
-			height: 500px;
-			background-color: #fff;
-			box-shadow: 10px 5px 5px 10px rgba(211, 211, 211, 0.2);
-			border-radius: 10px;
-		}
+
 
 		@media(max-width: 990px) {
 			#connection {
@@ -73,16 +64,18 @@
 							</label>
 						</div>
 
+						<div class="title text-center">
 
-						<button class="btn btn-lg btn-primary" type="submit">
-							connexion
-						</button>
-						<h2 class="h1-top">NOUVEAU CLIENT ?</h2>
+							<button class="btn btn-lg btn-primary btn-loggin" type=" submit">
+								connexion
+							</button>
+						</div>
+
+						<h4>NOUVEAU CLIENT ?</h4>
 						<a class="btn btn-lg btn-primary" href="{{ path('app_register') }}">Créez un compte</a>
 
 					</div>
 				</form>
-
 			</div>
 		</section>
 	{% endblock %}

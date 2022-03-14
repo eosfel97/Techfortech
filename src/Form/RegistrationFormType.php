@@ -28,7 +28,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Username",
-                ],'constraints' => [
+                ], 'constraints' => [
                     new NotBlank([
                         'message' => "Vous devez indiquer votre unsername.",
                     ]),
@@ -38,7 +38,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Email",
-                ],'constraints' => [
+                ], 'constraints' => [
                     new NotBlank([
                         'message' => "L'email {{ valeur }} n'est pas un email valide.",
                     ]),
@@ -48,7 +48,7 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Nom de famille",
-                ],'constraints' => [
+                ], 'constraints' => [
                     new NotBlank([
                         'message' => "Vous devez indiquer votre nom.",
                     ]),
@@ -58,14 +58,14 @@ class RegistrationFormType extends AbstractType
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Prénom",
-                ],'constraints'=>[
+                ], 'constraints' => [
 
-                 new NotBlank([
-                            'message' => "Vous devez indiquer votre prénom.",
-                        ]),
+                    new NotBlank([
+                        'message' => "Vous devez indiquer votre prénom.",
+                    ]),
                 ]
             ])
-            
+
             ->add('plainPassword', PasswordType::class, [
                 'mapped' => false,
                 'attr' => [
@@ -87,34 +87,34 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'placeholder' => "Numéro de téléphone",
                 ],
-                 'constraints' => [
+                'constraints' => [
 
-                     new NotBlank([
+                    new NotBlank([
                         'message' => "Vous devez indiquer votre numéro de téléphone.",
                     ]),
-                 ]
+                ]
             ])
-             ->add('town', TextType::class, [
+            ->add('town', TextType::class, [
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Ville/Commune",
                 ],     'constraints' => [
                     new NotBlank([
-                           'message' => "Vous devez indiquer votre Ville/Commune.",
-                       ]),
-                    ]
-                     
+                        'message' => "Vous devez indiquer votre Ville/Commune.",
+                    ]),
+                ]
+
             ])
-                ->add('zipCode', TextType::class, [
+            ->add('zipCode', TextType::class, [
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Code Postale",
                 ],     'constraints' => [
                     new NotBlank([
-                           'message' => "Vous devez indiquer votre Code Postale.",
-                       ]),
-                    ]
-                     
+                        'message' => "Vous devez indiquer votre Code Postale.",
+                    ]),
+                ]
+
             ])
             ->add('country', CountryType::class, [
                 'required' => true,
@@ -122,39 +122,39 @@ class RegistrationFormType extends AbstractType
                     'placeholder' => "Pays",
                 ],     'constraints' => [
                     new NotBlank([
-                           'message' => "Vous devez indiquer votre Pays.",
-                       ]),
-                    ]
-                     
+                        'message' => "Vous devez indiquer votre Pays.",
+                    ]),
+                ]
+
             ])
-            
+
             ->add('address', TextType::class, [
                 'required' => true,
                 'attr' => [
                     'placeholder' => "Adresse postale",
                 ],     'constraints' => [
                     new NotBlank([
-                           'message' => "Vous devez indiquer votre adresse postale.",
-                       ]),
-                    ]
-                     
-            ])
-            ->add('avartar', FileType::class, [
-                'label' => 'Brochure (PDF file)',
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/gif',
-                            'image/jpeg',
-                            'image/jpg'
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid PDF document',
-                    ])
-                ],
+                        'message' => "Vous devez indiquer votre adresse postale.",
+                    ]),
+                ]
+
             ]);
+        // ->add('avartar', FileType::class, [
+        //     'label' => 'Brochure (PDF file)',
+        //     'mapped' => false,
+        //     'required' => false,
+        //     'constraints' => [
+        //         new File([
+        //             'maxSize' => '1024k',
+        //             'mimeTypes' => [
+        //                 'image/gif',
+        //                 'image/jpeg',
+        //                 'image/jpg'
+        //             ],
+        //             'mimeTypesMessage' => 'Please upload a valid PDF document',
+        //         ])
+        //     ],
+        // ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

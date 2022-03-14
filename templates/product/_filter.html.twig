@@ -1,8 +1,8 @@
 {{ form_start(form, {attr: {class: 'filter js-filter-form'}}) }}
 
-{# <div class="spinner-border js-loading" role="status" aria-hidden="true" style="display: none">
+<div class="spinner-border js-loading" role="status" aria-hidden="true" style="display: none">
 	<span class="sr-only">Loading...</span>
-</div> #}
+</div>
 
 {{ form_row(form.q) }}
 
@@ -19,8 +19,8 @@
 		{{ form_row(form.max) }}
 	</div>
 </div>
-<h4>Promotions</h4>
-{{ form_row(form.promo) }}
+{# <h4>Promotions</h4>
+{{ form_row(form.promo) }} #}
 
 <button type="submit" class="btn btn-primary w-100">Filtrer</button>
 
