@@ -38,11 +38,11 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-      $avartar = $form->get('avartar')->getData();
+            $avartar = $form->get('avartar')->getData();
             $date = new DateTime();
             $user->setCrearted($date);
             $user->setPassword(
-            $userPasswordHasher->hashPassword(
+                $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
@@ -53,7 +53,7 @@ class RegistrationController extends AbstractController
                 $originalFilename = pathinfo($avartar->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$avartar->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $avartar->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -74,7 +74,9 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+            $this->emailVerifier->sendEmailConfirmation(
+                'app_verify_email',
+                $user,
                 (new TemplatedEmail())
                     ->from(new Address('contact@techfortech.net', 'Noreply'))
                     ->to($user->getEmail())
