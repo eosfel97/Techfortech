@@ -1,0 +1,19 @@
+<style>
+	.img_filter {
+		height: 100px;
+		width: 100px;
+	}
+</style>
+
+<table class="table">
+	<tbody>
+		<tr>
+			<td><img src="/upload/images/products/{{product.file}}" class="img_filter"/></td>
+			<td>{{product.name}}</td>
+			<td>{{product.price | price}}</td>
+			<td class="text-center">
+				<a href="{{path('cart_add',{'id': product.id} )}}" class="btn btn-primary mt-3">Add to Cart</a>
+			</td>
+		</tr>
+	</tbody>
+</table>

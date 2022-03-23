@@ -4,18 +4,21 @@
 {% endblock %}
 
 {% block body %}
+	<style>
+		body {
+			background-color: #03a9f4;
 
+		}
+	</style>
 	<div class="container ">
 		<div class="row">
 			<div class="col-md-3 mt-5">
-
 				{% include 'product/_filter.html.twig' with {form:form} only%}
 			</div>
 			<div class="col-md-12">
-				<div class="grid mt-5">
-
+				<div class="mt-5">
 					{% for product in products %}
-						{% include 'product/_card.html.twig' with {product:product} only%}
+						{% include 'product/_cardTable.html.twig' with {product:product} only%}
 					{% endfor %}
 				</div>
 			</div>
