@@ -17,7 +17,6 @@ class DashboardController extends AbstractDashboardController
 {
     public function __construct(private AdminUrlGenerator $adminUrlGenerator)
     {
-
     }
 
     #[Route('/admin', name: 'admin_index')]
@@ -25,9 +24,8 @@ class DashboardController extends AbstractDashboardController
     {
         $url = $this->adminUrlGenerator->setController(ProductCrudController::class)->generateUrl();
 
-        
-        return $this->redirect($url);
 
+        return $this->redirect($url);
     }
 
     public function configureDashboard(): Dashboard
@@ -40,19 +38,20 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::section('E-commerce');
         yield MenuItem::section('Products');
-        yield MenuItem::subMenu('Actions','fas fa-bars')->setSubItems([
-            MenuItem::linkToCrud('Create Product', 'fas fa-plus',Product::class)->setAction(Crud::PAGE_NEW),
-             MenuItem::linkToCrud('show Product', 'fas fa-eye',Product::class)
+        yield MenuItem::subMenu('Actions', 'fas fa-bars')->setSubItems([
+            MenuItem::linkToCrud('Create Product', 'fas fa-plus', Product::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('show Product', 'fas fa-eye', Product::class)
         ]);
         yield MenuItem::section('Categories');
-         yield MenuItem::subMenu('Actions','fas fa-bars')->setSubItems([
-            MenuItem::linkToCrud('Create Category', 'fas fa-plus',Category::class)->setAction(Crud::PAGE_NEW),
-             MenuItem::linkToCrud('show Category', 'fas fa-eye',Category::class)
+        yield MenuItem::subMenu('Actions', 'fas fa-bars')->setSubItems([
+            MenuItem::linkToCrud('Create Category', 'fas fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('show Category', 'fas fa-eye', Category::class)
         ]);
-           yield MenuItem::section('Users');
-            yield MenuItem::subMenu('Actions','fas fa-bars')->setSubItems([
-             MenuItem::linkToCrud('show User', 'fas fa-eye',User::class)
-             ]);
+        yield MenuItem::section('Users');
+        yield MenuItem::subMenu('Actions', 'fas fa-bars')->setSubItems([
+            MenuItem::linkToCrud('show User', 'fas fa-eye', User::class)
+        ]);
+
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

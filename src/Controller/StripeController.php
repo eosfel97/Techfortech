@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Controller;
+
 use Stripe\Stripe;
 use App\Entity\Invoice;
 use App\Repository\PurchaseRepository;
@@ -58,10 +60,7 @@ class StripeController extends AbstractController
         $em->flush($invoice);
         return $this->redirect($stripeSession->url, 303);
     }
-    #[Route([
-        "en" => '/stripe/{invoice}/success/{stripeSuccessKey}',
-        "fr" => "/stripe/{invoice}/succes/{stripeSuccessKey}"
-    ], name: 'stripe_valid_payment')]
+    #[Route("/stripe/{invoice}/succes/{stripeSuccessKey}", name: 'stripe_valid_payment')]
     public function success(Invoice $invoice, string $stripeSuccessKey, SessionInterface $session, PurchasesRepository $purchasesRepo): Response
     {
         if ($stripeSuccessKey != $invoice->getStripeSuccessKey()) {
@@ -70,25 +69,22 @@ class StripeController extends AbstractController
             ]);
         }
         $invoice->setPaid(true);
-        $session->set('cart', []);
+        $session->set('panier', []);
         $purchaseCriteria = [
             "invoice" => $invoice,
         ];
         $purchases = $purchasesRepo->findBy($purchaseCriteria);
-  
+        $this->addFlash('success', "Votre commande a été valider");
+        // dd($session);
         return $this->render('stripe/success.html.twig', [
             'invoice' => $invoice,
             'purchases' => $purchases,
         ]);
     }
-    #[Route([
-        "en" => '/stripe/{invoice}/cancel',
-        "fr" => "/stripe/{invoice}/annulation"
-    ], name: 'stripe_error_payment')]
-    public function error(Invoice $invoice, TranslatorInterface $translator): Response
+    #[Route("/stripe/{invoice}/annulation", name: 'stripe_error_payment')]
+    public function error(Invoice $invoice): Response
     {
-        $this->addFlash("danger", $translator->trans("src.controller.stripe:There was a problem during the payment process"));
- 
+        $this->addFlash("danger", "Le payment a éte refuser");
         return $this->redirectToRoute("cart_show");
     }
 }

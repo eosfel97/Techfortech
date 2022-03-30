@@ -7,21 +7,27 @@
 	<style>
 		body {
 			background-color: #03a9f4;
-
+			width: 100vh;
+			height: 100vh;
+		}
+		.filter_cc {
+			margin-top: 150px;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			border: 2px solid black;
 		}
 	</style>
-	<div class="container ">
-		<div class="row">
-			<div class="col-md-3 mt-5">
-				{% include 'product/_filter.html.twig' with {form:form} only%}
-			</div>
-			<div class="col-md-12">
-				<div class="mt-5">
-					{% for product in products %}
-						{% include 'product/_cardTable.html.twig' with {product:product} only%}
-					{% endfor %}
-				</div>
-			</div>
+	<div class="container filter_cc ">
+
+		<div>
+			{% for product in products %}
+				{% include 'product/_cardTable.html.twig' with {product:product} only%}
+			{% endfor %}
 		</div>
+
+
+		{% include 'product/_filter.html.twig' with {form:form} only%}
+
 	</div>
 {% endblock %}

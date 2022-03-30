@@ -11,16 +11,11 @@
 	</style>
 	<section id="ShopFinal" class="py-1">
 		<div class="container">
-			<div class="title text-center">
-				<h2 class="position-relative d-inline-block py-2">ADRESSE DE LIVRAISON</h2>
-			</div>
 			<div class="row g-0">
-				{{ form_start(form) }}
-				{{ form_widget(form) }}
-				<button class="btn btn-dark">{{ button_label|default('Confirm') }}</button>
-				{{ form_end(form) }}
-				<h1 class="h1-top">récapitulatif de la commande</h1>
 
+				<div class="title text-center">
+					<h2 class="position-relative d-inline-block py-2">récapitulatif de la commande</h2>
+				</div>
 				<table class="table">
 					<thead>
 						<tr>
@@ -48,8 +43,16 @@
 						</tr>
 					</tfoot>
 				</table>
+				<div class="title text-center">
+					<h2 class="position-relative d-inline-block py-2">ADRESSE DE LIVRAISON</h2>
+				</div>
 
-
+				{{ form_start(form) }}
+				{{ form_widget(form) }}
+				<div class=" text-center">
+					<button class="btn btn-dark btn-lg text-center">{{ button_label|default('Confirm') }}</button>
+				</div>
+				{{ form_end(form) }}
 			</div>
 		</section>
 	{% endblock %}

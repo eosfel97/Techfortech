@@ -1,0 +1,154 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du profil de
+	{{app.user.firstname}}
+	{{app.user.lastname}}
+{% endblock %}
+
+{% block body %}
+	<style>
+		body {
+			background-color: #03a9f4;
+			font-size: 20px;
+		}
+		.main-body {
+			padding: 25px;
+		}
+		.card {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			min-width: 0;
+			word-wrap: break-word;
+			background-color: #fff;
+			background-clip: border-box;
+			border: 0 solid transparent;
+			border-radius: 0.25rem;
+			margin-bottom: 1.5rem;
+			box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+		}
+		.me-2 {
+			margin-right: 0.5rem !important;
+		}
+		#profil_modifier {
+			margin: 150px auto auto;
+
+			width: 100vh;
+			height: 100vh;
+		}
+		.edit,
+		.deco {
+			font-size: 15px;
+
+			color: white;
+		}
+	</style>
+	<div class="container " id="profil_modifier">
+		<div class="main-body">
+			<div class="row">
+				<div class="col-lg-4">
+					<div class="card">
+						<div class="card-body">
+							<div class="d-flex flex-column align-items-center text-center">
+								<img src="/upload/images/users/{{app.user.avartar}}" alt="image de profil" class="rounded-circle " width="150">
+								<div class="mt-3">
+									<h4>{{app.user.lastname}}
+										{{app.user.firstname}}</h4>
+									<br>
+									<a class="nav-link btn btn-md btn-primary  deco" href="{{ path('app_logout') }}">Mes commandes</a>
+									<br>
+									<a class="nav-link btn btn-lg btn-danger mt-2 deco" href="{{ path('app_logout') }}">Déconnexion</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="card">
+						<div class="card-body">
+							{{ form_start(form) }}
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Nom</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">{{ form_widget(form.lastname) }}
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Prenom</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">{{ form_widget(form.firstname) }}
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Photo de profile</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">{{ form_widget(form.avartar) }}
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Speudo</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">{{ form_widget(form.username) }}
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">email</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">{{ form_widget(form.email) }}
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Mobile</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">{{ form_widget(form.phone) }}
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Ville</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">{{ form_widget(form.town) }}
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Code-Postale</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">{{ form_widget(form.zipCode) }}
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Pays</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">{{ form_widget(form.country) }}
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-sm-3">
+									<h6 class="mb-0">Address</h6>
+								</div>
+								<div class="col-sm-9 text-secondary">{{ form_widget(form.address) }}
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="text-center ">
+									<button type="submit" class="btn btn-primary register_btn btn-lg">VALIDER</button>
+								</div>
+							</div>
+							{{ form_end(form) }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,201 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil
+{% endblock %}
+
+{% block body %}
+	<style>
+		body {
+
+			text-align: left;
+			background-color: #03a9f4;
+			font-size: 20px;
+		}
+		.main-body {
+			padding: 25px;
+		}
+		.card {
+			box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+		}
+
+		.card {
+
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			min-width: 0;
+			word-wrap: break-word;
+			background-color: #fff;
+			background-clip: border-box;
+			border: 0 solid rgba(0, 0, 0, 0.125);
+			border-radius: 0.25rem;
+		}
+
+		.card-body {
+			flex: 1 1 auto;
+			min-height: 1px;
+			padding: 1rem;
+
+		}
+
+		.gutters-sm {
+			margin-right: -8px;
+			margin-left: -8px;
+		}
+
+		.gutters-sm > .col,
+		.gutters-sm > [class*=col-] {
+			padding-right: 8px;
+			padding-left: 8px;
+		}
+		.mb-3,
+		.my-3 {
+			margin-bottom: 1rem !important;
+		}
+
+
+		.h-100 {
+			height: 100% !important;
+		}
+		.shadow-none {
+			box-shadow: none !important;
+		}
+		h6 {
+			font-size: 15px;
+		}
+		.edit,
+		.deco {
+			font-size: 15px;
+
+			color: white;
+		}
+		#profil {
+			margin: 150px auto auto;
+
+			width: 100vh;
+			height: 100vh;
+		}
+	</style>
+
+	<section id="profil">
+		<div class="container">
+			<div class="container">
+				<div class="main-body">
+					<div class="row gutters-sm">
+						<div class="col-md-4 mb-3">
+							<div class="card">
+								<div class="card-body">
+									<div class="d-flex flex-column align-items-center text-center">
+										<img src="/upload/images/users/{{app.user.avartar}}" alt="photo de profil" class="rounded-circle" width="150">
+										<div class="mt-3">
+											<h4>{{app.user.lastname}}
+												{{app.user.firstname}}</h4>
+											<br>
+											<a class="nav-link btn btn-md btn-primary  deco" href="{{ path('invoice_user_invoice') }}">Mes commandes</a>
+											<br>
+											<a class="nav-link btn btn-lg btn-danger mt-2 deco" href="{{ path('app_logout') }}">Déconnexion</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="card mb-3">
+								<div class="card-body">
+									<div class="row">
+										<div class="col-sm-3">
+											<h6 class="mb-0">Email :</h6>
+										</div>
+										<div class="col-sm-9 ">
+											{{app.user.email}}
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-sm-3">
+											<h6 class="mb-0">Nom :</h6>
+										</div>
+										<div class="col-sm-9 ">
+											{{app.user.lastname}}
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-sm-3">
+											<h6 class="mb-0">Prénom :</h6>
+										</div>
+										<div class="col-sm-9 ">
+											{{app.user.firstname}}
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-sm-3">
+											<h6 class="mb-0">Mobile :</h6>
+										</div>
+										<div class="col-sm-9 ">
+											{{app.user.phone}}
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-sm-3">
+											<h6 class="mb-0">Speudo :</h6>
+										</div>
+										<div class="col-sm-9 ">
+											{{app.user.username}}
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-sm-3">
+											<h6 class="mb-0">Address :</h6>
+										</div>
+										<div class="col-sm-9 ">
+											{{app.user.address}}
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-sm-3">
+											<h6 class="mb-0">Ville :</h6>
+										</div>
+										<div class="col-sm-9 ">
+											{{app.user.town}}
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-sm-4">
+											<h6 class="mb-0">Code-Postale :</h6>
+										</div>
+										<div class="col-sm-3 ">
+											{{app.user.zipCode}}
+										</div>
+									</div>
+									<hr>
+									<div class="row">
+										<div class="col-sm-3">
+											<h6 class="mb-0">Pays :</h6>
+										</div>
+										<div class="col-sm-9 ">
+											{{app.user.country}}
+										</div>
+									</div>
+									<hr>
+
+									<div class="row">
+										<div class="col-sm-12 text-center">
+											<a class="nav-link btn-primary mt-2 edit" href="{{path('app_profile_modifier')}}">Modifier</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
