@@ -3,21 +3,19 @@
 		height: 50px;
 		width: 50px;
 	}
-	.table {
-		width: 500px;
-	}
 </style>
-<div class="row ">
-	<table class="table">
-		<tbody>
-			<tr>
-				<td><img src="/upload/images/products/{{product.file}}" class="img_filter"/></td>
-				<td>{{product.name}}</td>
-				<td>{{product.price | price}}</td>
-				<td class="text-center">
-					<a href="{{path('cart_add',{'id': product.id} )}}" class="btn btn-primary mt-3">Add to Cart</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</div>
+
+<table class="table">
+	<tbody>
+		<tr>
+			<td><img src="/upload/images/products/{{product.file}}" class="img_filter"/></td>
+			<td>
+				<a href="{{ path('product_show', {'id': product.id}) }}">{{product.name}}</a>
+			</td>
+			<td>{{product.price | price}}</td>
+			<td class="text-center">
+				<a href="{{path('cart_add',{'id': product.id} )}}" class="btn btn-primary mt-3">Add to Cart</a>
+			</td>
+		</tr>
+	</tbody>
+</table>

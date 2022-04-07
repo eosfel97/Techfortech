@@ -91,7 +91,7 @@
 											<h4>{{app.user.lastname}}
 												{{app.user.firstname}}</h4>
 											<br>
-											<a class="nav-link btn btn-md btn-primary  deco" href="{{ path('invoice_user_invoice') }}">Mes commandes</a>
+											<a class="nav-link btn btn-md btn-primary  deco" href="{{ path('invoice_user_invoice',{'id':app.user.id}) }}">Mes commandes</a>
 											<br>
 											<a class="nav-link btn btn-lg btn-danger mt-2 deco" href="{{ path('app_logout') }}">Déconnexion</a>
 										</div>

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Factures
+{% endblock %}
+
+{% block body %}
+	<style>
+		#factures {
+			margin-top: 180px;
+		}
+	</style>
+	<section id="factures">
+		<h1 class="text-center">Facture de
+			{{invoice.name}}</h1>
+		<h1 class="text-center">Mes achats
+		</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Produit</th>
+					<th>Prix</th>
+					<th>Quantité</th>
+					<th>Total</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for product in products %}
+					<tr>
+						<td>{{product.name}}</td>
+						<td>{{product.price}}</td>
+
+					</tr>
+				{% endfor %}
+			</tbody>
+		</tbody>
+		<tfoot>
+			<tr class="tt"></tr>
+		</tfoot>
+	</table>
+</section>{% endblock %}

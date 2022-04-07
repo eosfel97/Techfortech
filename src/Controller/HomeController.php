@@ -26,7 +26,6 @@ class HomeController extends AbstractController
         );
         return $this->render('home/index.html.twig', [
             'products' => $products,
-            'nom' => 'Gnahiet any',
         ]);
     }
     #[Route('/contact', name: 'home_contact')]

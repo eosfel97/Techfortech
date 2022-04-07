@@ -138,22 +138,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ]
 
-            ])
-            ->add('avartar', FileType::class, [
-                'label' => 'Brochure (PDF file)',
-                'mapped' => false,
-                'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/gif',
-                            'image/jpeg',
-                            'image/jpg'
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid PDF document',
-                    ])
-                ],
             ]);
     }
 

@@ -3,109 +3,169 @@
 namespace App\Entity;
 
 use App\Entity\Category;
-use Doctrine\ORM\Mapping as ORM; 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProductRepository;
 
-#[ORM\Entity(repositoryClass:ProductRepository::class)]
+#[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
     #[ORM\Id]
-#[ORM\GeneratedValue]
-#[ORM\Column(type:'integer')]
-private $id;
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private $id;
 
-#[ORM\Column(type:'string', length:255)]
-private $name;
+    #[ORM\Column(type: 'string', length: 255)]
+    private $name;
 
-#[ORM\Column(type:'string', length:255, nullable:true)]
-private $description;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $description;
 
-#[ORM\Column(type:'integer')]
-private $price;
+    #[ORM\Column(type: 'integer')]
+    private $price;
 
-#[ORM\Column(type:'integer', nullable:true)]
-private $reduct;
+    #[ORM\Column(type: 'integer', nullable: true)]
+    private $reduct;
 
-#[ORM\ManyToOne(targetEntity:Category::class)]
-private $category_id;
+    #[ORM\ManyToOne(targetEntity: Category::class)]
+    private $category_id;
 
-#[ORM\Column(type: 'string', length: 255, nullable: true)]
-private $file;
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $file;
 
-public function getId(): ?int
+    #[ORM\ManyToOne(targetEntity: Invoice::class)]
+    private $invoice;
+
+    #[ORM\OneToMany(mappedBy: 'products', targetEntity: Comments::class, orphanRemoval: true)]
+    private $comments;
+
+    public function __construct()
     {
-    return $this->id;
-}
+        $this->comments = new ArrayCollection();
+    }
 
-function getName(): ?string
+
+    public function getId(): ?int
     {
-    return $this->name;
-}
+        return $this->id;
+    }
 
-function setName(string $name): self
+    function getName(): ?string
     {
-    $this->name = $name;
+        return $this->name;
+    }
 
-    return $this;
-}
-
-function getDescription(): ?string
+    function setName(string $name): self
     {
-    return $this->description;
-}
+        $this->name = $name;
 
-function setDescription(?string $description): self
+        return $this;
+    }
+
+    function getDescription(): ?string
     {
-    $this->description = $description;
+        return $this->description;
+    }
 
-    return $this;
-}
-
-function getPrice(): ?int
+    function setDescription(?string $description): self
     {
-    return $this->price;
-}
+        $this->description = $description;
 
-function setPrice(int $price): self
+        return $this;
+    }
+
+    function getPrice(): ?int
     {
-    $this->price = $price;
+        return $this->price;
+    }
 
-    return $this;
-}
-
-function getReduct(): ?int
+    function setPrice(int $price): self
     {
-    return $this->reduct;
-}
+        $this->price = $price;
 
-function setReduct(?int $reduct): self
+        return $this;
+    }
+
+    function getReduct(): ?int
     {
-    $this->reduct = $reduct;
+        return $this->reduct;
+    }
 
-    return $this;
-}
-
-function getCategoryId(): ?Category
+    function setReduct(?int $reduct): self
     {
-    return $this->category_id;
-}
+        $this->reduct = $reduct;
 
-function setCategoryId(?Category $category_id): self
+        return $this;
+    }
+
+    function getCategoryId(): ?Category
     {
-    $this->category_id = $category_id;
+        return $this->category_id;
+    }
 
-    return $this;
-}
+    function setCategoryId(?Category $category_id): self
+    {
+        $this->category_id = $category_id;
 
-public function getFile(): ?string
-{
-    return $this->file;
-}
+        return $this;
+    }
 
-public function setFile(?string $file): self
-{
-    $this->file = $file;
+    public function getFile(): ?string
+    {
+        return $this->file;
+    }
 
-    return $this;
-}
+    public function setFile(?string $file): self
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    public function getInvoice(): ?Invoice
+    {
+        return $this->invoice;
+    }
+
+    public function setInvoice(?Invoice $invoice): self
+    {
+        $this->invoice = $invoice;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comments>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comments $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setProducts($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comments $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getProducts() === $this) {
+                $comment->setProducts(null);
+            }
+        }
+
+        return $this;
+    }
+    public function __toString()
+    {
+        return $this->id;
+    }
 }

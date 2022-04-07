@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Controller;
-use App\Form\SearchForm;
+
+use DateTime;
 use App\Entity\Product;
 use App\Data\SearchData;
+use App\Entity\Comments;
+use App\Form\SearchForm;
 use App\Form\ProductType;
+use App\Form\CommentsType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,16 +19,19 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/product')]
 class ProductController extends AbstractController
 {
-    #[Route('/', name: 'product_index', methods: ['GET'])]
-    public function index(ProductRepository $productRepository ,Request $request): Response
-    {         $data = new SearchData();
+    #[Route('/all/{page}', name: 'product_index', methods: ['GET'], defaults: ["page" => 1], requirements: ["page" => "\d+"])]
+    public function index(ProductRepository $productRepository, Request $request): Response
+    {
+
+        $data = new SearchData();
         $data->page = $request->get('page', 1);
         $form = $this->createForm(SearchForm::class, $data);
         $form->handleRequest($request);
         $products = $productRepository->findSearch($data);
+
         return $this->render('product/index.html.twig', [
             'products' => $products,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 
@@ -49,10 +56,39 @@ class ProductController extends AbstractController
     }
 
     #[Route('/{id}', name: 'product_show', methods: ['GET'])]
-    public function show(Product $product): Response
+    public function show(Product $product, Request $request, EntityManagerInterface $em): Response
     {
+
+        // On crée le commentaire 
+
+        $comment = new Comments;
+        // si il a un utilisateur
+        $user = $this->getUser();
+        if ($user) {
+            $comment->setName($user->getLastname());
+        } else {
+            $this->addFlash('danger', "Vous devez creer un compte pour ajouter un commentaires");
+            return $this->redirectToRoute('app_login');
+        }
+
+        // On génère le formulaire
+        $commentForm = $this->createForm(CommentsType::class, $comment);
+
+        $commentForm->handleRequest($request);
+        // On traite le formulaire
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            $comment->setCreatedAt(new DateTime());
+            $comment->setProducts($product);
+
+            $em->persist($comment);
+            $em->flush();
+
+            $this->addFlash('success', 'Votre commentaire a bien été envoyé');
+            return $this->redirectToRoute('product_show', [], Response::HTTP_SEE_OTHER);
+        }
         return $this->render('product/show.html.twig', [
             'product' => $product,
+            'commentForm' => $commentForm->createView()
         ]);
     }
 
@@ -77,7 +113,7 @@ class ProductController extends AbstractController
     #[Route('/{id}', name: 'product_delete', methods: ['POST'])]
     public function delete(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$product->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('_token'))) {
             $entityManager->remove($product);
             $entityManager->flush();
         }

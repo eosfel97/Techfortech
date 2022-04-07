@@ -4,10 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Product;
 use App\Data\SearchData;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
 
 /**
  * @method Product|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,17 +17,18 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Product::class);
+        $this->paginator = $paginator;
     }
-  /**
+    /**
      * Récupère les produits en lien avec une recherche
-     * @return product[]
+     * @return PaginatorInterface
      */
-public function findSearch(SearchData $search): array
-{
-     $query = $this
+    public function findSearch(SearchData $search)
+    {
+        $query = $this
             ->createQueryBuilder('p')
             ->select('c', 'p')
             ->join('p.category_id', 'c');
@@ -50,50 +51,17 @@ public function findSearch(SearchData $search): array
                 ->setParameter('max', $search->max);
         }
 
-        if (!empty($search->promo)) {
+        if (!empty($search->category)) {
             $query = $query
-                ->andWhere('p.promo = 1');
+                ->andWhere('c.id IN (:category)')
+                ->setParameter('category', $search->category);
         }
 
-        if (!empty($search->categories)) {
-            $query = $query
-                ->andWhere('c.id IN (:categories)')
-                ->setParameter('categories', $search->categories);
-        }
- 
-            return $query->getQuery()->getResult();
-}
-   
-    // /**
-    //  * @return Product[] Returns an array of Product objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $query = $query->getQuery();
+        return $this->paginator->paginate(
+            $query,
+            $search->page,
+            7
+        );
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Product
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-//       public function __toString()
-//   {
-//       return $this->();
-//   }
 }

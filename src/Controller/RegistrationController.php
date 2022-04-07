@@ -38,7 +38,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $avartar = $form->get('avartar')->getData();
+            // $avartar = $form->get('avartar')->getData();
             $date = new DateTime();
             $user->setCrearted($date);
             $user->setPassword(
@@ -49,26 +49,26 @@ class RegistrationController extends AbstractController
             );
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
-            if ($avartar) {
-                $originalFilename = pathinfo($avartar->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $avartar->guessExtension();
+            // if ($avartar) {
+            //     $originalFilename = pathinfo($avartar->getClientOriginalName(), PATHINFO_FILENAME);
+            //     // this is needed to safely include the file name as part of the URL
+            //     $safeFilename = $slugger->slug($originalFilename);
+            //     $newFilename = $safeFilename . '-' . uniqid() . '.' . $avartar->guessExtension();
 
-                // Move the file to the directory where brochures are stored
-                try {
-                    $avartar->move(
-                        $this->getParameter('user_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
+            //     // Move the file to the directory where brochures are stored
+            //     try {
+            //         $avartar->move(
+            //             $this->getParameter('user_directory'),
+            //             $newFilename
+            //         );
+            //     } catch (FileException $e) {
+            //         // ... handle exception if something happens during file upload
+            //     }
 
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
-                $user->setAvartar($newFilename);
-            }
+            //     // updates the 'brochureFilename' property to store the PDF file name
+            //     // instead of its contents
+            //     $user->setAvartar($newFilename);
+            // }
 
             $entityManager->persist($user);
             $entityManager->flush();

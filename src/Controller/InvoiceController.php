@@ -4,15 +4,18 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Invoice;
+use App\Entity\Product;
 use App\Entity\Purchases;
 use App\Form\InvoiceType;
 use App\Service\Cart\CartService;
 use App\Repository\InvoiceRepository;
 use App\Repository\ProductRepository;
+use App\Repository\PurchasesRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -76,7 +79,20 @@ class InvoiceController extends AbstractController
             'total' => $cartService->getTotal(),
         ]);
     }
-    #[Route('/Commandes', name: 'invoice_user_invoice', methods: ['GET', 'POST'])]
+    #[Route('/{id}/show', name: 'invoice_show', methods: ['GET'])]
+    #[Entity('purchases', options: ["id" => "product_id"])]
+
+    public function show(Invoice $invoice, Product $product): Response
+    {
+
+        $user = $this->getUser();
+        return $this->render('invoice/show.html.twig', [
+            'invoice' => $invoice,
+            'products' => $product,
+            'user' => $user,
+        ]);
+    }
+    #[Route('/{id}/Commandes', name: 'invoice_user_invoice', methods: ['GET', 'POST'])]
     public function userInvoice(InvoiceRepository $invoice): Response
     {
         $user = $this->getUser();

@@ -26,7 +26,7 @@ class SearchForm extends AbstractType
                     'placeholder' => 'Rechercher'
                 ]
             ])
-            ->add('categories', EntityType::class, [
+            ->add('category', EntityType::class, [
                 'label' => false,
                 'required' => false,
                 'class' => Category::class,
@@ -46,10 +46,6 @@ class SearchForm extends AbstractType
                 'attr' => [
                     'placeholder' => 'Prix max'
                 ]
-            ])
-            ->add('promo', CheckboxType::class, [
-                'label' => 'En promotion',
-                'required' => false,
             ]);
     }
 
