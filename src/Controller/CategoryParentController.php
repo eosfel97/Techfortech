@@ -20,7 +20,7 @@ class CategoryParentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'categoryp_show', methods: ['GET', 'POST'])]
+    #[Route('/parent/{id}', name: 'categoryp_show', methods: ['GET', 'POST'])]
     public function show(CategoryParent $categoryp, CategoryRepository $category): Response
     {
         $categories = $category->findBy([], [
