@@ -190,10 +190,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-//     public function __construct()
-// {
-//     $this->date = new \DateTime('now');
-// }
+    //     public function __construct()
+    // {
+    //     $this->date = new \DateTime('now');
+    // }
 
     public function getCrearted(): ?\DateTimeInterface
     {
@@ -309,5 +309,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->id;
     }
 }

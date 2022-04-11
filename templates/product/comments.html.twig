@@ -1,0 +1,27 @@
+<section>
+	{% for com in comments %}
+		<div class="container mb-2">
+			<div class="row justify-content-center">
+				<div class="col-12 col-md-10 col-lg-9 col-xl-8">
+					<div class="card card-row">
+						<div class="row gx-0">
+							<div class="card-body">
+								<blockquote class="mb-0 text-center">
+									<p>
+										{{com.content}}
+									</p>
+									<footer class="">
+										<span class="h6 text-uppercase">De
+											{{com.name}}
+											le
+											{{com.createdAt|date("d/m/Y H:i") }}</span>
+									</footer>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+</section>

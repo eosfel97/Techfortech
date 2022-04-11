@@ -8,39 +8,37 @@
 		body {
 			background-color: #03a9f4;
 		}
-		.filter_cc {
+		.container {
 			margin-top: 150px;
 			display: flex;
-			gap: 30px;
-		}
-		.paginationT {
-
-			border: 1px solid black;
-		}
-		@media(max-width:672px) {
-			.filter_cc {
-				flex-direction: column;
-			}
-			.table {
-				{
-					width: 40%;
-				}
-			}
+			justify-content: space-around;
+			flex-wrap: wrap;
+			align-content: center;
 		}
 	</style>
 
-	<div class="container filter_cc ">
 
-		{% include 'product/_filter.html.twig' with {form:form} only%}
+	<div class="container col-lg-10  ">
 
-		<div class="row col-lg-8 tables">
-			{% for product in products %}
-				{% include 'product/_cardTable.html.twig' with {product:product} only%}
-			{% endfor %}
-
+		{% for product in products %}
+			{% include 'product/_cardTable.html.twig' with {product:product} only%}
+		{% endfor %}
+		<div class="navigation mt-5">
+			{{ knp_pagination_render(products) }}
 		</div>
-
 	</div>
-
-
+	<a class="btn btn-primary mt-2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+		Filtrer les produits
+	</a>
+	<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+		<div class="offcanvas-header">
+			<h5 class="offcanvas-title" id="offcanvasExampleLabel">Filtre produits</h5>
+			<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+		</div>
+		<div class="offcanvas-body">
+			<div>
+				{% include 'product/_filter.html.twig' with {form:form} only%}
+			</div>
+		</div>
+	</div>
 {% endblock %}

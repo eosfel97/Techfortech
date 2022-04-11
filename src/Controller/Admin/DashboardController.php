@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Entity\Comments;
+use App\Entity\CategoryParent;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -45,8 +46,13 @@ class DashboardController extends AbstractDashboardController
         ]);
         yield MenuItem::section('Categories');
         yield MenuItem::subMenu('Actions', 'fas fa-bars')->setSubItems([
-            MenuItem::linkToCrud('Create Category', 'fas fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
-            MenuItem::linkToCrud('show Category', 'fas fa-eye', Category::class)
+            MenuItem::linkToCrud('Create Category', 'fas fa-plus', CategoryParent::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('show Category', 'fas fa-eye', CategoryParent::class)
+        ]);
+        yield MenuItem::section('Sous_Categories');
+        yield MenuItem::subMenu('Actions', 'fas fa-bars')->setSubItems([
+            MenuItem::linkToCrud('Create Sous_Categories', 'fas fa-plus', Category::class)->setAction(Crud::PAGE_NEW),
+            MenuItem::linkToCrud('show Sous_Categories', 'fas fa-eye', Category::class)
         ]);
         yield MenuItem::section('Users');
         yield MenuItem::subMenu('Actions', 'fas fa-bars')->setSubItems([

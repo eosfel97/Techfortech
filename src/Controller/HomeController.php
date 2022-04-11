@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Repository\ProductRepository;
 use Symfony\Component\Mime\Email;
+use App\Repository\ProductRepository;
+use App\Repository\CategoryParentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    function index(ProductRepository $productRepository): Response
+    function index(ProductRepository $productRepository, CategoryParentRepository $categoryP): Response
     {
         $products = $productRepository->findAll();
         $products = $productRepository->findBy(
@@ -24,8 +25,10 @@ class HomeController extends AbstractController
             4,
             0
         );
+        $catep = $categoryP->findAll();
         return $this->render('home/index.html.twig', [
             'products' => $products,
+            'categoryps' => $catep,
         ]);
     }
     #[Route('/contact', name: 'home_contact')]

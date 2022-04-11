@@ -2,11 +2,13 @@
 
 namespace App\Repository;
 
+use App\Entity\Product;
 use App\Entity\Comments;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Comments|null find($id, $lockMode = null, $lockVersion = null)
@@ -16,9 +18,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class CommentsRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Comments::class);
+        $this->paginator = $paginator;
     }
 
     /**
@@ -45,22 +48,20 @@ class CommentsRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Comments[] Returns an array of Comments objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findComments($value)
     {
+        if ($value instanceof Product) {
+            $object = 'products';
+        }
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('c.' . $object . ' = :val')
+            ->andWhere('c.active = true')
+            ->setParameter('val', $value->getId())
+            ->orderBy('c.id', 'DESC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?Comments

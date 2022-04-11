@@ -2,13 +2,13 @@
 
 namespace App\Controller;
 
-use DateTime;
 use App\Entity\Product;
 use App\Data\SearchData;
 use App\Entity\Comments;
 use App\Form\SearchForm;
 use App\Form\ProductType;
 use App\Form\CommentsType;
+use App\Repository\CommentsRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,13 +25,13 @@ class ProductController extends AbstractController
 
         $data = new SearchData();
         $data->page = $request->get('page', 1);
-        $form = $this->createForm(SearchForm::class, $data);
-        $form->handleRequest($request);
+        $formsearch = $this->createForm(SearchForm::class, $data);
+        $formsearch->handleRequest($request);
         $products = $productRepository->findSearch($data);
 
         return $this->render('product/index.html.twig', [
             'products' => $products,
-            'form' => $form->createView(),
+            'form' => $formsearch->createView(),
         ]);
     }
 
@@ -55,40 +55,34 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'product_show', methods: ['GET'])]
-    public function show(Product $product, Request $request, EntityManagerInterface $em): Response
+    #[Route('/{id}', name: 'product_show', methods: ['GET', 'POST'])]
+    public function show(Product $product, Request $request, EntityManagerInterface $em, CommentsRepository $cem): Response
     {
-
-        // On crée le commentaire 
+        $comments = $cem->findComments($product);
+        $user = $this->getUser();
 
         $comment = new Comments;
-        // si il a un utilisateur
-        $user = $this->getUser();
-        if ($user) {
-            $comment->setName($user->getLastname());
-        } else {
-            $this->addFlash('danger', "Vous devez creer un compte pour ajouter un commentaires");
-            return $this->redirectToRoute('app_login');
-        }
-
-        // On génère le formulaire
-        $commentForm = $this->createForm(CommentsType::class, $comment);
-
-        $commentForm->handleRequest($request);
-        // On traite le formulaire
-        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-            $comment->setCreatedAt(new DateTime());
+        $form = $this->createForm(CommentsType::class, $comment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            if (!$user) {
+                $this->addFlash('danger', "Vous devez creer un compte pour laisser un commentaire");
+                return $this->redirectToRoute('app_login');
+            }
+            $comment->setCreatedAt(new \DateTimeImmutable());
             $comment->setProducts($product);
-
+            $comment->setUser($user);
+            $comment->setName($user->getLastname());
             $em->persist($comment);
             $em->flush();
-
-            $this->addFlash('success', 'Votre commentaire a bien été envoyé');
-            return $this->redirectToRoute('product_show', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Votre commentaire a bien été envoyé, il sera valide après vérification.');
+            return $this->redirectToRoute('product_index', [], Response::HTTP_SEE_OTHER);
         }
+
         return $this->render('product/show.html.twig', [
             'product' => $product,
-            'commentForm' => $commentForm->createView()
+            'form' => $form->createView(),
+            'comments' => $comments
         ]);
     }
 

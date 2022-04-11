@@ -38,22 +38,17 @@
 							{{product.description}}
 						</p>
 					</div>
+
 					<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-						<div class="col-xs2 col-sm3" id="ajout-commentaire">
-							<h2>Ajouter un commentaire</h2>
-							{{ form_start(commentForm) }}
-							{{ form_row(commentForm.name) }}
-							{{ form_row(commentForm.title) }}
-							{{ form_row(commentForm.content) }}
-							<div class="container_register_btn ">
-								<button type="submit" class="btn btn-primary register_btn btn-lg">VALIDER</button>
-							</div>
-							{{ form_end(commentForm) }}
-						</div>
+
+						{% include "product/comments.html.twig" %}
+
+
+						{% include "product/postcomments.html.twig" %}
+
 					</div>
+
 				</div>
+			</section>
 
-			</div>
-		</section>
-
-	{% endblock %}
+		{% endblock %}

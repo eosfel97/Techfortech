@@ -1,21 +1,25 @@
 <style>
 	.img_filter {
-		height: 50px;
-		width: 50px;
+		height: 150px;
+		width: 150px;
+	}
+	.card {
+		height: 380px;
+		width: 250px;
+		margin-top: 10px;
 	}
 </style>
+<div class="card text-center">
+	<img src="/upload/images/products/{{product.file}}" class=" card-img-top img_filter"/>
+	<div class="card-body">
+		<h5 class="card-title">
+			<a href="{{ path('product_show', {'id': product.id}) }}">{{product.name}}</a>
+		</h5>
+		<p class="card-text">{{product.price | price}}</p>
 
-<table class="table">
-	<tbody>
-		<tr>
-			<td><img src="/upload/images/products/{{product.file}}" class="img_filter"/></td>
-			<td>
-				<a href="{{ path('product_show', {'id': product.id}) }}">{{product.name}}</a>
-			</td>
-			<td>{{product.price | price}}</td>
-			<td class="text-center">
-				<a href="{{path('cart_add',{'id': product.id} )}}" class="btn btn-primary mt-3">Add to Cart</a>
-			</td>
-		</tr>
-	</tbody>
-</table>
+		<a href="{{path('cart_add',{'id': product.id} )}}" class="btn btn-primary mt-3">Add to Cart</a>
+
+	</div>
+</div>
+
+<script src="/css/app.js"></script>

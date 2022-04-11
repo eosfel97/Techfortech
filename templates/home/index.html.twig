@@ -66,38 +66,9 @@
 				</div>
 				<div class="row g-0">
 					<div class="collection-list mt-4 row gx-0 gy-3">
-						<div class="col-md-6 col-lg-4 col-xl-3 p-2 ">
-							<div class="collection-img position-relative">
-								<img src="/upload/images/products/LD0005869780_1.jpg" class="w-100">
-							</div>
-							<div class="text-center">
-								<p class="text-capitalize my-1">COMPOSANTS</p>
-							</div>
-						</div>
-						<div class="col-md-6 col-lg-4 col-xl-3 p-2 ">
-							<div class="collection-img position-relative">
-								<img src="/upload/images/products/LD0005776729_1.jpg" class="w-100">
-							</div>
-							<div class="text-center">
-								<p class="text-capitalize my-1">PÉRIPHÉRIQUES PC</p>
-							</div>
-						</div>
-						<div class="col-md-6 col-lg-4 col-xl-3 p-2 ">
-							<div class="collection-img position-relative">
-								<img src="/upload/images/products/LD0005871582_1.jpg" class="w-100">
-							</div>
-							<div class="text-center">
-								<p class="text-capitalize my-1">ORDINATEUR DE BUREAU</p>
-							</div>
-						</div>
-						<div class="col-md-6 col-lg-4 col-xl-3 p-2 ">
-							<div class="collection-img position-relative">
-								<img src="/upload/images/products/LD0005869780_1.jpg" class="w-100">
-							</div>
-							<div class="text-center">
-								<p class="text-capitalize my-1">SERVICE</p>
-							</div>
-						</div>
+						{% for categoryp in categoryps %}
+							{% include 'category_parent/show.html.twig' with {categoryp:categoryp} only%}
+						{% endfor %}
 					</div>
 				</div>
 			</div>
