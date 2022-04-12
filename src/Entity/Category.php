@@ -25,6 +25,9 @@ class Category
     #[ORM\JoinColumn(nullable: false)]
     private $category;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $file;
+
 
 
     public function __construct()
@@ -74,6 +77,18 @@ class Category
     public function setCategory(?CategoryParent $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getFile(): ?string
+    {
+        return $this->file;
+    }
+
+    public function setFile(?string $file): self
+    {
+        $this->file = $file;
 
         return $this;
     }

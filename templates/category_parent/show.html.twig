@@ -1,10 +1,22 @@
-<div class="col-md-6 col-lg-4 col-xl-3 p-2 ">
-	<div class="collection-img position-relative">
-		<img src="/upload/images/products/LD0005869780_1.jpg" class="w-100">
-	</div>
-	<div class="text-center">
-		<p class="text-capitalize my-1">
-			<a href="{{ path('categoryp_show', {'id': categoryp.id}) }}">{{categoryp.name}}</a>
-		</p>
-	</div>
+<style>
+	.container {
+		margin-top: 150px;
+		display: flex;
+		justify-content: space-around;
+		flex-wrap: wrap;
+		align-content: center;
+	}
+</style>
+<div class="container">
+	{% for category in categories %}
+		{% if category.category == categoryps %}
+			<div class="card" style="width: 18rem;">
+				<img src="/upload/images/products/{{category.file}}" class="w-100 card-img-top "/>
+				<div class=" card-body">
+					<a href="#" class="btn">{{ category.name }}</a>
+				</div>
+			</div>
+		{% endif %}
+
+	{% endfor %}
 </div>

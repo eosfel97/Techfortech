@@ -26,9 +26,9 @@ class CategoryParentController extends AbstractController
         $categories = $category->findBy([], [
             "category" => "ASC",
         ]);
-        dd($categories, $categoryp);
+        // dd($categories);
         return $this->render('category_parent/show.html.twig', [
-            'categoryp' => $categoryp,
+            'categoryps' => $categoryp,
             'categories' => $categories,
         ]);
     }
