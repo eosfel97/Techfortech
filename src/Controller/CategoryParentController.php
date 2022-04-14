@@ -10,9 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/Category')]
 class CategoryParentController extends AbstractController
 {
-    #[Route('/parent', name: 'app_category_parent')]
+    #[Route('/', name: 'app_category_parent')]
     public function index(): Response
     {
         return $this->render('category_parent/index.html.twig', [
@@ -20,7 +21,7 @@ class CategoryParentController extends AbstractController
         ]);
     }
 
-    #[Route('/parent/{id}', name: 'categoryp_show', methods: ['GET', 'POST'])]
+    #[Route('/{name}', name: 'categoryp_show', methods: ['GET', 'POST'])]
     public function show(CategoryParent $categoryp, CategoryRepository $category): Response
     {
         $categories = $category->findBy([], [

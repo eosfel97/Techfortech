@@ -15,17 +15,20 @@
 			flex-wrap: wrap;
 			align-content: center;
 		}
+		.navigation {
+			margin: auto;
+		}
 	</style>
 
 
-	<div class="container col-lg-10  ">
+	<div class="container  ">
 
 		{% for product in products %}
 			{% include 'product/_cardTable.html.twig' with {product:product} only%}
 		{% endfor %}
-		<div class="navigation mt-5">
-			{{ knp_pagination_render(products) }}
-		</div>
+	</div>
+	<div class="navigation mt-5 ">
+		{{ knp_pagination_render(products) }}
 	</div>
 	<a class="btn btn-primary mt-2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
 		Filtrer les produits

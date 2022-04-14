@@ -19,6 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/Facturation')]
 class InvoiceController extends AbstractController
 {
     #[Route('/', name: 'app_invoice')]
@@ -28,7 +29,7 @@ class InvoiceController extends AbstractController
             'controller_name' => 'InvoiceController',
         ]);
     }
-    #[Route('/invoice', name: 'invoice_new', methods: ['GET', 'POST'])]
+    #[Route('/Info', name: 'invoice_new', methods: ['GET', 'POST'])]
     public function new(Request $request, SessionInterface $session, CartService $cartService, ManagerRegistry $doctrine, ProductRepository $productRepository): Response
     {
         $invoice = new Invoice();
@@ -80,8 +81,7 @@ class InvoiceController extends AbstractController
         ]);
     }
     #[Route('/{id}/show', name: 'invoice_show', methods: ['GET'])]
-    #[Entity('purchases', options: ["id" => "product_id"])]
-
+    // #[Entity('purchases', options: ["id" => "product_id"])]
     public function show(Invoice $invoice, Product $product): Response
     {
 

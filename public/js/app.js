@@ -1,2 +1,2 @@
 const sr = ScrollReveal();
-sr.reveal('.card',{},1000);
+sr.reveal('.card');

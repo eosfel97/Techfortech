@@ -1,22 +1,45 @@
-<style>
-	.container {
-		margin-top: 150px;
-		display: flex;
-		justify-content: space-around;
-		flex-wrap: wrap;
-		align-content: center;
-	}
-</style>
-<div class="container">
-	{% for category in categories %}
-		{% if category.category == categoryps %}
-			<div class="card" style="width: 18rem;">
-				<img src="/upload/images/products/{{category.file}}" class="w-100 card-img-top "/>
-				<div class=" card-body">
-					<a href="#" class="btn">{{ category.name }}</a>
-				</div>
-			</div>
-		{% endif %}
+{% extends 'base.html.twig' %}
 
-	{% endfor %}
-</div>
+{% block title %}Category index
+{% endblock %}
+
+{% block body %}
+
+	<style>
+		.categoryps {
+			margin: auto auto 50px;
+			position: relative;
+			display: flex;
+			justify-content: space-around;
+			flex-wrap: wrap;
+			align-content: center;
+		}
+		.card {
+			height: 200px;
+			width: 250px;
+			margin-top: 10px;
+		}
+		h1 {
+			text-align: center;
+			text-transform: uppercase;
+			margin-top: 150px;
+		}
+	</style>
+	<h1>NOS CATÉGORIES
+		{{categoryps.name}}
+		:</h1>
+	<div class="container categoryps ">
+		{% for category in categories %}
+			{% if category.category == categoryps %}
+				<div class="card">
+					<img src="/upload/images/products/{{category.file}}" class="w-50 card-img-top "/>
+					<div class=" card-body">
+						<a href="{{ path("product_index")}}" class="btn fw-bold ">{{ category.name }}</a>
+					</div>
+				</div>
+			{% endif %}
+
+		{% endfor %}
+	</div>
+
+{% endblock %}
