@@ -44,6 +44,6 @@
 			<a href="{{ path('product_show', {'id': product.id}) }}">{{product.name}}</a>
 		</p>
 		<span class="fw-bold">{{product.price/100 | number_format(0, ',', '')}}€</span>
-		<a href="{{path('cart_add',{'id': product.id} )}}" class="btn btn-primary mt-3">Add to Cart</a>
+		<a href="{{path('cart_add',{'id': product.name} )}}" class="btn btn-primary mt-3">Add to Cart</a>
 	</div>
 </div>

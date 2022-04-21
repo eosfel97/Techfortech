@@ -80,7 +80,7 @@ class InvoiceController extends AbstractController
             'total' => $cartService->getTotal(),
         ]);
     }
-    #[Route('/{id}/show', name: 'invoice_show', methods: ['GET'])]
+    #[Route('/facture/{id}', name: 'invoice_show', requirements: ["id" => "\d+"], methods: ['GET'],)]
     // #[Entity('purchases', options: ["id" => "product_id"])]
     public function show(Invoice $invoice, Product $product): Response
     {
@@ -92,7 +92,8 @@ class InvoiceController extends AbstractController
             'user' => $user,
         ]);
     }
-    #[Route('/{id}/Commandes', name: 'invoice_user_invoice', methods: ['GET', 'POST'])]
+    // #[Route('/{id}', name: 'invoice_show', methods: ['GET'])]
+    #[Route('/commande/{id}', name: 'invoice_user_invoice', methods: ['GET', 'POST'])]
     public function userInvoice(InvoiceRepository $invoice): Response
     {
         $user = $this->getUser();

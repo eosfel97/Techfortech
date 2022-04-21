@@ -73,7 +73,7 @@ class StripeController extends AbstractController
         ];
         $purchases = $purchasesRepo->findBy($purchaseCriteria);
         $this->addFlash('success', "Votre commande a été valider");
-        // dd($session);
+        return $this->redirectToRoute("home");
         return $this->render('stripe/success.html.twig', [
             'invoice' => $invoice,
             'purchases' => $purchases,

@@ -5,54 +5,95 @@
 
 {% block body %}
 	<style>
+		body {
+			background-color: #03a9f4;
+		}
 		#ShopFinal {
 			margin-top: 150px;
 		}
+		h2 {
+			text-transform: uppercase;
+		}
+		.adl {
+
+			background-color: #fff;
+			box-shadow: 25px 25px 2px 1px rgba(0, 0, 255, 0.2);
+		}
 	</style>
 	<section id="ShopFinal" class="py-1">
-		<div class="container">
-			<div class="row g-0">
-
-				<div class="title text-center">
-					<h2 class="position-relative d-inline-block py-2">récapitulatif du panier</h2>
+		<div
+			class="container adl">
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-xl">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Panier</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Produit</th>
+										<th>Prix</th>
+										<th>Quantité</th>
+										<th>Total</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for item in items %}
+										<tr>
+											<td>{{item.product.name}}</td>
+											<td>{{item.product.price | price}}</td>
+											<td>{{item.quantity}}</td>
+											<td>{{(item.product.price  * item.quantity) | price }}</td>
+										</tr>
+									{% endfor %}
+								</tbody>
+								<tfoot>
+									<tr class="tt">
+										<td colspan="3">TOTAL :</td>
+										<td>{{total | price}}</td>
+										<td></td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</div>
 				</div>
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Produit</th>
-							<th>Prix</th>
-							<th>Quantité</th>
-							<th>Total</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for item in items %}
-							<tr>
-								<td>{{item.product.name}}</td>
-								<td>{{item.product.price | price}}</td>
-								<td>{{item.quantity}}</td>
-								<td>{{(item.product.price  * item.quantity) | price }}</td>
-							</tr>
-						{% endfor %}
-					</tbody>
-					<tfoot>
-						<tr class="tt">
-							<td colspan="3">TOTAL :</td>
-							<td>{{total | price}}</td>
-							<td></td>
-						</tr>
-					</tfoot>
-				</table>
+			</div>
+			<div class="row g-0">
 				<div class="title text-center">
 					<h2 class="position-relative d-inline-block py-2">adresse de livraison</h2>
 				</div>
 
 				{{ form_start(form) }}
-				{{ form_widget(form) }}
+				<div class="row">
+					<div class="col">
+						{{ form_widget(form.name) }}
+					</div>
+					<div class="col">
+						{{ form_widget(form.firstname) }}
+					</div>
+				</div><br>
+				{{ form_widget(form.address) }}
+				<br>
+				{{ form_widget(form.country) }}
+				<br>
+				{{ form_widget(form.town) }}
+				<br>
+				{{ form_widget(form.zip_code) }}
+				<br>
 				<div class=" text-center">
-					<button class="btn btn-dark btn-lg text-center">{{ button_label|default('Confirm') }}</button>
+					<button class="btn btn-primary btn-lg text-center">{{ button_label|default('Continuer') }}</button>
 				</div>
 				{{ form_end(form) }}
 			</div>
+			<!-- Button trigger modal -->
+			<button type="button " class="btn btn-primary btn-lg m-2 " data-bs-toggle="modal" data-bs-target="#exampleModal">
+				Panier Recapitulatif
+			</button>
+
 		</section>
 	{% endblock %}
