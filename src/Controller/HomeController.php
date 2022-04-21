@@ -30,7 +30,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'products' => $products,
             'categoryps' => $catep,
-            'items' => $cartService->getFullCart(),
+            'itemspanier' => $cartService->getFullCart(),
         ]);
     }
     #[Route('/contact', name: 'home_contact')]
