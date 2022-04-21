@@ -24,6 +24,9 @@ class CategoryParent
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Category::class)]
     private $categories;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $move;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -90,5 +93,17 @@ class CategoryParent
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getMove(): ?string
+    {
+        return $this->move;
+    }
+
+    public function setMove(?string $move): self
+    {
+        $this->move = $move;
+
+        return $this;
     }
 }
