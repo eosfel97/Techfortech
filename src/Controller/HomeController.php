@@ -6,6 +6,7 @@ namespace App\Controller;
 use Symfony\Component\Mime\Email;
 use App\Repository\ProductRepository;
 use App\Repository\CategoryParentRepository;
+use App\Service\Cart\CartService;
 use ContainerVwH6vGW\getCartServiceService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -16,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    function index(ProductRepository $productRepository, CategoryParentRepository $categoryP): Response
+    function index(ProductRepository $productRepository, CategoryParentRepository $categoryP, CartService $cartService): Response
     {
         $products = $productRepository->findAll();
         $products = $productRepository->findBy(
@@ -32,6 +33,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'products' => $products,
             'categoryps' => $catep,
+            'items' => $cartService->getFullCart(),
         ]);
     }
     #[Route('/contact', name: 'home_contact')]
