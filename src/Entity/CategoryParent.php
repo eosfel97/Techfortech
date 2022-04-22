@@ -18,14 +18,15 @@ class CategoryParent
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $file;
+
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Category::class)]
     private $categories;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $move;
+    private $file;
+
+
 
     public function __construct()
     {
@@ -49,17 +50,7 @@ class CategoryParent
 
         return $this;
     }
-    public function getFile(): ?string
-    {
-        return $this->file;
-    }
 
-    public function setFile(?string $file): self
-    {
-        $this->file = $file;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Category>
@@ -95,14 +86,14 @@ class CategoryParent
         return $this->name;
     }
 
-    public function getMove(): ?string
+    public function getFile(): ?string
     {
-        return $this->move;
+        return $this->file;
     }
 
-    public function setMove(?string $move): self
+    public function setFile(?string $file): self
     {
-        $this->move = $move;
+        $this->file = $file;
 
         return $this;
     }
