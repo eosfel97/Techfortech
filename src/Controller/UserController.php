@@ -19,15 +19,16 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class UserController extends AbstractController
 {
     #[Route('/membres_profil', name: 'app_user')]
-    public function index(): Response
+    public function index(CartService $cartService): Response
     {
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
+            'items' => $cartService->getFullCart(),
         ]);
     }
 
     #[Route('/membres_infos', name: 'app_profile_modifier')]
-    public function editprofile(Request $request, EntityManagerInterface $em, SluggerInterface $slugger): Response
+    public function editprofile(Request $request, EntityManagerInterface $em, SluggerInterface $slugger, CartService $cartService): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(EditProfileType::class, $user);
@@ -64,6 +65,7 @@ class UserController extends AbstractController
         }
         return $this->render('user/editprofile.html.twig', [
             'form' => $form->createView(),
+            'items' => $cartService->getFullCart(),
         ]);
     }
 }

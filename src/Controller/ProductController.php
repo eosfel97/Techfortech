@@ -8,8 +8,9 @@ use App\Entity\Comments;
 use App\Form\SearchForm;
 use App\Form\ProductType;
 use App\Form\CommentsType;
-use App\Repository\CommentsRepository;
+use App\Service\Cart\CartService;
 use App\Repository\ProductRepository;
+use App\Repository\CommentsRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProductController extends AbstractController
 {
     #[Route('/all/{page}', name: 'product_index', methods: ['GET'], defaults: ["page" => 1], requirements: ["page" => "\d+"])]
-    public function index(ProductRepository $productRepository, Request $request): Response
+    public function index(ProductRepository $productRepository, Request $request, CartService $cartService): Response
     {
 
         $data = new SearchData();
@@ -32,6 +33,8 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', [
             'products' => $products,
             'form' => $formsearch->createView(),
+            'items' => $cartService->getFullCart(),
+
         ]);
     }
 
@@ -56,7 +59,7 @@ class ProductController extends AbstractController
     // }
 
     #[Route('/{id}', name: 'product_show', methods: ['GET', 'POST'])]
-    public function show(Product $product, Request $request, EntityManagerInterface $em, CommentsRepository $cem): Response
+    public function show(Product $product, Request $request, EntityManagerInterface $em, CommentsRepository $cem, CartService $cartService): Response
     {
         $comments = $cem->findComments($product);
         $user = $this->getUser();
@@ -82,7 +85,9 @@ class ProductController extends AbstractController
         return $this->render('product/show.html.twig', [
             'product' => $product,
             'form' => $form->createView(),
-            'comments' => $comments
+            'comments' => $comments,
+            'items' => $cartService->getFullCart(),
+
         ]);
     }
 

@@ -55,14 +55,15 @@
 				{% endif %}
 				<li class="nav-item">
 					<a class="nav-link  btn my-2 my-sm-0 text-black" href="{{ path('cart_index') }}">
-						<i
-							class="fa-solid fa-bag-shopping fa-3x position-relative" id="fa-bag">{# {% if items|length > 0 %}
-								
-																<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger ">
-																	{{items|length}}
-																	<span class="visually-hidden">unread messages</span>
-																</span>
-															{% endif %} #}
+						<i class="fa-solid fa-bag-shopping fa-3x position-relative" id="fa-bag">
+
+							{% if items|length > 0 %}
+
+								<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger ">
+									{{items|length}}
+									<span class="visually-hidden">unread messages</span>
+								</span>
+							{% endif %}
 
 						</i>
 					</a>

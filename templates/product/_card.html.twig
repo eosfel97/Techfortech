@@ -37,13 +37,11 @@
 
 	<div class="product-img position-relative overflow-hidden">
 
-		<img src="/upload/images/products/{{product.file}}" class="w-90"/>
+		<img src="/upload/images/products/{{product.file}}" class="w-80"/>
 	</div>
 	<div class="text-center d_pi">
-		<p class="text-capitalize my-1">
-			<a href="{{ path('product_show', {'id': product.id}) }}">{{product.name}}</a>
-		</p>
-		<span class="fw-bold">{{product.price/100 | number_format(0, ',', '')}}€</span>
-		<a href="{{path('cart_add',{'id': product.id} )}}" class="btn btn-primary mt-3">Add to Cart</a>
-	</div>
-</div>
+		<a href="{{ path('product_show', {'id': product.id}) }}">{{product.name}}</a>
+	</p>
+	<span class="fw-bold">{{product.price/100 | number_format(0, ',', '')}}€</span>
+	<a href="{{path('cart_add',{'id': product.id} )}}" class="btn btn-primary mt-3">Add to Cart</a>
+</div></div>

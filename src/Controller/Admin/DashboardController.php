@@ -7,9 +7,13 @@ use App\Entity\Product;
 use App\Entity\Category;
 use App\Entity\Comments;
 use App\Entity\CategoryParent;
+
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -33,8 +37,10 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Techfortech');
+            ->setTitle('TechforAll')
+            ->setFaviconPath('upload/favicon.png');
     }
+
 
     public function configureMenuItems(): iterable
     {
@@ -63,6 +69,9 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('show comments', 'fas fa-comments', Comments::class)
         ]);
 
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::section('HomePage');
+        yield MenuItem::subMenu('Actions', 'fas fa-bars')->setSubItems([
+            MenuItem::linkToUrl('Accueil', 'fas fa-home', 'http://127.0.0.1:8000/')
+        ]);
     }
 }
