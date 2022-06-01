@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!
+{% endblock %}
+
+{% block body %}
+	<style>
+		section {
+			margin: 150px auto;
+		}
+	</style>
+
+	<section>
+		<div class="title text-center">
+			<h2>Contactez-nous</h2>
+			<small>Vous souhaitez obtenir plus d'informations à propos d'un produit ou d'une commande ? N'hésitez pas, contactez-nous !</small>
+		</div>
+		<div>
+			{{ form_start(form) }}
+			<br><br>
+			{{ form_widget(form.email) }}
+			<br>
+			{{ form_widget(form.title) }}
+			<br>
+			{{ form_widget(form.content) }}
+			<br>
+			{{ form_end(form) }}
+
+
+		</div>
+	</section>
+{% endblock %}
