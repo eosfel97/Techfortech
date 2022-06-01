@@ -18,4 +18,22 @@ class MentionController extends AbstractController
 
         ]);
     }
+    #[Route('/nos-conditions-generales-de-vente', name: 'app_cgv')]
+    public function cgv(CartService $cartService): Response
+    {
+        return $this->render('mention/cgv.html.twig', [
+            'controller_name' => 'MentionController',
+            'items' => $cartService->getFullCart(),
+
+        ]);
+    }
+    #[Route('/Politique de Confidentialité', name: 'app_polity')]
+    public function polity(CartService $cartService): Response
+    {
+        return $this->render('mention/polity.html.twig', [
+            'controller_name' => 'MentionController',
+            'items' => $cartService->getFullCart(),
+
+        ]);
+    }
 }
