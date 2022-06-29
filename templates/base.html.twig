@@ -1,4 +1,3 @@
-		{% include 'Partial/cookie2.php' %}
 
 <!doctype html>
 <html lang="en">
@@ -18,6 +17,8 @@
 		href="/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Custom CSS   -->
 		<link rel="shortcut icon" href="{{ asset('upload/logo1.svg') }}" type="image/x-icon"> {% block stylesheets %}{% endblock %}
+		{{ encore_entry_script_tags('app') }}
+		{{ encore_entry_link_tags('app') }}
 		<style>
 			* {
 				margin: 0;
@@ -30,8 +31,6 @@
 				min-height: 100vh;
 			}
 		</style>
-		{{ encore_entry_script_tags('app') }}
-		{{ encore_entry_link_tags('app') }}
 		<title>
 			{% block title %}{% endblock %}
 		</title>
@@ -40,12 +39,29 @@
 		{% include 'Partial/_navBar.twig' %}
 		{% block body %}{% endblock %}
 		{% include 'Partial/_footerBar.twig' %}
-		{% include 'Partial/cookie.php' %}
+
 		<!-- Bootstrap JS -->
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 		<script src="app.js"></script>
 		{% block javascripts %}{% endblock %}
+<script>
+    const cookieBox = document.querySelector(".wrapper"),
+    acceptBtn = cookieBox.querySelector("button");
+    acceptBtn.onclick = ()=>{
+    
+      document.cookie = "CookieRgpd=true; max-age="+60*60*24*30;
+      if(document.cookie){ 
+        cookieBox.classList.add("hide"); 
+      }else{ 
+        alert("Cookie can't be set! Please unblock this site from the cookie setting of your browser.");
+      }
+    }
+    let checkCookie = document.cookie.indexOf("CookieRgpd=true");
+    checkCookie != -1 ? cookieBox.classList.add("hide") : cookieBox.classList.remove("hide");
 
+	const sr = ScrollReveal();
+sr.reveal(".card");
+  </script>
 
 	</body>
 </html>
